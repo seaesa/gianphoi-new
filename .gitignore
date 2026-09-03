@@ -1,0 +1,7 @@
+.omc/
+.oko/
+.omc
+.oko
+node_modules/
+.env
+.DS_Store
