@@ -15,8 +15,9 @@ fetch() {
 }
 
 fetch https://images.unsplash.com/photo-1684703125510-673d3042873f "$IMG/hero-banner.jpg"
-fetch https://plus.unsplash.com/premium_photo-1683134581882-07dfd927ead1 "$IMG/about-thi-cong.jpg"
-fetch https://plus.unsplash.com/premium_photo-1661963024541-1a485c66957d "$IMG/thi-cong.jpeg"
+# Thay thế: ảnh thi công người nước ngoài -> ảnh thợ/kỹ thuật viên châu Á (Pexels, free license)
+fetch https://images.pexels.com/photos/4491871/pexels-photo-4491871.jpeg "$IMG/about-thi-cong.jpg"
+fetch https://images.pexels.com/photos/1249611/pexels-photo-1249611.jpeg "$IMG/thi-cong.jpeg"
 
 fetch https://images.unsplash.com/photo-1517502166878-35c93a0072f0 "$IMG/services/gian-phoi-dieu-khien.jpeg"
 fetch https://images.unsplash.com/photo-1754959069303-1b7e6cf8059f "$IMG/services/gian-phoi-treo-tran.jpg"
@@ -32,17 +33,20 @@ fetch https://images.unsplash.com/photo-1757125505346-2d71c70e6003 "$IMG/project
 fetch https://images.unsplash.com/photo-1759162788764-f40075c8857f "$IMG/projects/quan-7.jpg"
 fetch https://images.unsplash.com/photo-1762028007806-751f2bef444a "$IMG/projects/quan-1.jpg"
 
-fetch https://images.unsplash.com/photo-1721673027581-cd2d7c342daf "$IMG/blog/quan-3.webp"
-fetch https://plus.unsplash.com/premium_photo-1663045230477-ad641bffef0f "$IMG/blog/di-an.webp"
-fetch https://images.unsplash.com/photo-1728034261564-18930dcb2c8e "$IMG/blog/quan-1.webp"
-fetch https://plus.unsplash.com/premium_photo-1679686261674-6850ee4dedb0 "$IMG/blog/mui-hoi.webp"
-fetch https://images.unsplash.com/photo-1762845872088-12c352bbb119 "$IMG/blog/chung-cu.webp"
-fetch https://images.unsplash.com/photo-1724893962134-fa9647914053 "$IMG/blog/mua-mua.webp"
-fetch https://images.unsplash.com/photo-1759064776046-45b988af4b6d "$IMG/blog/top5-thuong-hieu.webp"
-fetch https://images.unsplash.com/photo-1737054718383-68055423d164 "$IMG/blog/top5-mau.webp"
-fetch https://images.unsplash.com/photo-1765371513492-264506c3ad09 "$IMG/blog/vach-lanh.webp"
-fetch https://images.unsplash.com/photo-1747113225475-8592c238cf08 "$IMG/blog/giai-phap-khong-gian.webp"
-fetch https://plus.unsplash.com/premium_photo-1661963024541-1a485c66957d "$IMG/blog/top10-don-vi.webp"
-fetch https://plus.unsplash.com/premium_photo-1674575954775-b5ef5af6fd17 "$IMG/blog/nhan-biet-chinh-hang.webp"
+# Blog: thay Unsplash (người nước ngoài) -> Pexels trung tính / châu Á, free license, không lộ mặt người nước ngoài
+fetch https://images.pexels.com/photos/3803423/pexels-photo-3803423.jpeg "$IMG/blog/quan-3.webp"
+# di-an: dùng lại ảnh gốc gianphoichinhhang.com (ảnh thật VN, không người nước ngoài)
+fetch https://www.gianphoichinhhang.com/images/posts/22/thumbnails/lap-dat-gian-phoi-thong-minh-chinh-hang-tai-phuong-di-an-tphcm-binh-duong-cu-300x200.webp "$IMG/blog/di-an.webp"
+fetch https://images.pexels.com/photos/8092505/pexels-photo-8092505.jpeg "$IMG/blog/quan-1.webp"
+fetch https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg "$IMG/blog/mui-hoi.webp"
+fetch https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg "$IMG/blog/chung-cu.webp"
+fetch https://images.pexels.com/photos/4103242/pexels-photo-4103242.jpeg "$IMG/blog/mua-mua.webp"
+fetch https://images.pexels.com/photos/585418/pexels-photo-585418.jpeg "$IMG/blog/top5-thuong-hieu.webp"
+fetch https://images.pexels.com/photos/2988425/pexels-photo-2988425.jpeg "$IMG/blog/top5-mau.webp"
+fetch https://images.pexels.com/photos/3791466/pexels-photo-3791466.jpeg "$IMG/blog/vach-lanh.webp"
+fetch https://images.pexels.com/photos/259239/pexels-photo-259239.jpeg "$IMG/blog/giai-phap-khong-gian.webp"
+# top10: dùng lại ảnh gốc gianphoichinhhang.com (ảnh thật VN)
+fetch https://www.gianphoichinhhang.com/images/posts/13/thumbnails/top-10-don-vi-lap-dat-gian-phoi-thong-minh-uy-tin-o-binh-duong--tphcm-300x200.webp "$IMG/blog/top10-don-vi.webp"
+fetch https://images.pexels.com/photos/5693633/pexels-photo-5693633.jpeg "$IMG/blog/nhan-biet-chinh-hang.webp"
 
 echo "done"
