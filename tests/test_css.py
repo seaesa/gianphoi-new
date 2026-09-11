@@ -119,3 +119,86 @@ class TestStructure(unittest.TestCase):
 
     def test_has_skip_link(self):
         self.assertIn(".skip-link", CSS)
+
+
+class TestComponentClasses(unittest.TestCase):
+    REQUIRED = [
+        ".container", ".band", ".band--steel", ".grid",
+        ".btn", ".btn--primary", ".btn--ghost",
+        ".card", ".card--service", ".card__price",
+        ".spec-line", ".badge--popular",
+        ".rail", ".rail__value", ".stepper", ".stepper__num",
+        ".faq__question", ".faq__panel",
+        ".site-header", ".nav__link", ".nav-toggle",
+        ".sticky-bar", ".site-footer",
+        ".field", ".field__error", ".chip",
+        ".article", ".toc", ".quote-aside",
+    ]
+
+    def test_every_component_class_defined(self):
+        for selector in self.REQUIRED:
+            with self.subTest(selector=selector):
+                self.assertIn(selector, CSS)
+
+    def test_amber_bright_only_used_at_large_sizes(self):
+        """Ràng buộc toàn cục #4: --amber-bright chỉ cho chữ >= 24px."""
+        blocks = re.findall(r"\{[^{}]*var\(--amber-bright\)[^{}]*\}", CSS)
+        self.assertTrue(blocks, "Không tìm thấy chỗ nào dùng --amber-bright")
+        for block in blocks:
+            with self.subTest(block=block[:60]):
+                has_large_font = re.search(
+                    r"font-size:\s*var\(--fs-(2xl|3xl|4xl)\)", block
+                )
+                is_border_or_icon = re.search(
+                    r"(border|stroke|fill|background)", block
+                )
+                self.assertTrue(
+                    has_large_font or is_border_or_icon,
+                    "--amber-bright dùng cho chữ nhỏ — vi phạm ngưỡng 4.27:1",
+                )
+
+    def test_transitions_use_only_the_two_durations(self):
+        """Chỉ soi shorthand `transition:`; `transition-duration` trong khối
+        reduced-motion là phần reset, cố ý dùng 0.01ms."""
+        durations = set(re.findall(r"transition:[^;]*?(\d+)ms", CSS))
+        self.assertTrue(durations <= {"150", "250"}, f"Thời lượng lạ: {durations}")
+
+    def test_transitions_only_animate_named_properties(self):
+        props = re.findall(r"transition:\s*([a-z-]+)\s", CSS)
+        allowed = {
+            "transform", "opacity", "color", "background", "background-color",
+            "border-color", "outline-color",
+        }
+        for prop in props:
+            with self.subTest(prop=prop):
+                self.assertNotEqual(prop, "all", "transition: all làm jank")
+                self.assertIn(prop, allowed)
+
+    def test_touch_targets_reach_44px(self):
+        for selector in (".btn", ".sticky-bar__action", ".nav-toggle"):
+            with self.subTest(selector=selector):
+                block = re.search(re.escape(selector) + r"\s*\{([^{}]*)\}", CSS)
+                self.assertIsNotNone(block, f"{selector} chưa định nghĩa")
+                self.assertIn("min-height", block.group(1))
+
+    def test_sticky_bar_is_mobile_only(self):
+        self.assertRegex(
+            CSS, r"@media[^{]*min-width[^{]*\{[^}]*\.sticky-bar[^}]*display:\s*none"
+        )
+
+    def test_header_phone_number_never_hidden(self):
+        """Lỗi C1: bản cũ có `.header-phone span { display: none }` ở 768px."""
+        for block in re.findall(r"\.header__phone-number[^{]*\{([^}]*)\}", CSS):
+            with self.subTest(block=block[:60]):
+                self.assertNotIn("display: none", block)
+                self.assertNotIn("display:none", block)
+
+
+class TestNoHorizontalOverflow(unittest.TestCase):
+    def test_media_queries_start_at_phone_width_or_above(self):
+        widths = [int(w) for w in re.findall(r"min-width:\s*(\d+)px", CSS)]
+        media_queries = [w for w in widths if w >= 100]
+        self.assertTrue(all(w >= 320 for w in media_queries), media_queries)
+
+    def test_tables_scroll_inside_their_own_container(self):
+        self.assertRegex(CSS, r"overflow-x:\s*auto")
