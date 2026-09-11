@@ -152,9 +152,136 @@ def build_home(site: SiteData) -> str:
     )
 
 
+GROUP_ANCHORS = {
+    "Giàn phơi": ("gian-phoi", "Ba kiểu nâng hạ cho ba kiểu không gian."),
+    "An toàn ban công": (
+        "an-toan-ban-cong",
+        "Chắn côn trùng và bảo vệ trẻ nhỏ mà vẫn thoáng gió.",
+    ),
+    "Che chắn": ("che-chan", "Giữ nhiệt, chắn nắng và chắn mưa cho ban công, sân thượng."),
+}
+
+
+def _service_group_sections(site: SiteData) -> str:
+    """Ba nhóm dịch vụ, mỗi nhóm một section có anchor riêng (sửa lỗi C6)."""
+    from scripts.sitedata import service_groups
+
+    blocks = []
+    for index, (group, services) in enumerate(service_groups(site)):
+        anchor, blurb = GROUP_ANCHORS[group]
+        band = "band--paper" if index % 2 == 0 else "band--surface"
+        cards = "\n".join(
+            components.service_card(s, svg_inline=read_svg(s.svg)) for s in services
+        )
+        blocks.append(
+            f'  <section class="band {band}" id="{anchor}">\n'
+            f'    <div class="container">\n'
+            f'      <div class="section-head">\n'
+            f'        <span class="eyebrow">Nhóm {index + 1} / 3</span>\n'
+            f"        <h2>{group}</h2>\n"
+            f"        <p>{blurb}</p>\n"
+            f"      </div>\n"
+            f'      <div class="grid grid--3">\n'
+            f"{cards}\n"
+            f"      </div>\n"
+            f"    </div>\n"
+            f"  </section>"
+        )
+    return "\n\n".join(blocks)
+
+
+def build_services(site: SiteData) -> str:
+    crumbs = [("Trang chủ", "/"), ("Dịch vụ & Bảng giá", "/dich-vu.html")]
+    jsonld = schema.to_jsonld(
+        schema.local_business(site),
+        *[schema.service_schema(site, s) for s in site.services],
+        schema.faq_page(site.faqs),
+        schema.breadcrumb_list(crumbs),
+    )
+    return render_page(
+        site,
+        template="dich-vu.html",
+        out="dich-vu.html",
+        page_id="services",
+        title=f"Dịch vụ & Bảng giá | {site.business.name}",
+        description=(
+            "Bảng giá lắp đặt giàn phơi thông minh, lưới cáp ban công, cửa lưới chống "
+            "muỗi, vách ngăn lạnh, mái hiên và bạt che nắng mưa tại TP.HCM & Bình Dương."
+        ),
+        path="/dich-vu.html",
+        jsonld=jsonld,
+        main_context={
+            "groups": _service_group_sections(site),
+            "comparison": components.comparison_table(site),
+            "stepper": components.stepper(PROCESS_STEPS),
+            "faqs": components.faq_list(site.faqs),
+        },
+    )
+
+
+def build_areas(site: SiteData) -> str:
+    import urllib.parse
+
+    crumbs = [("Trang chủ", "/"), ("Khu vực phục vụ", "/khu-vuc.html")]
+    query = urllib.parse.quote(site.business.maps_query)
+    return render_page(
+        site,
+        template="khu-vuc.html",
+        out="khu-vuc.html",
+        page_id="areas",
+        title=f"Khu vực phục vụ | {site.business.name}",
+        description=(
+            "Khu vực nhận khảo sát và thi công giàn phơi thông minh, lưới cáp ban công "
+            "tại TP.HCM và Bình Dương."
+        ),
+        path="/khu-vuc.html",
+        jsonld=schema.to_jsonld(
+            schema.local_business(site), schema.breadcrumb_list(crumbs)
+        ),
+        main_context={
+            "areas": components.area_list(site.areas),
+            "map_src": f"https://www.google.com/maps?q={query}&output=embed",
+        },
+    )
+
+
+def build_about(site: SiteData) -> str:
+    crumbs = [("Trang chủ", "/"), ("Giới thiệu", "/gioi-thieu.html")]
+    usecases = "\n".join(
+        components.usecase_card(
+            title, body, find_service(site, slug), svg_inline=read_svg(f"{slug}.svg")
+        )
+        for title, body, slug in USE_CASES
+    )
+    return render_page(
+        site,
+        template="gioi-thieu.html",
+        out="gioi-thieu.html",
+        page_id="about",
+        title=f"Giới thiệu | {site.business.name}",
+        description=(
+            "Hơn 10 năm kinh nghiệm lắp đặt và sửa chữa giàn phơi thông minh, lưới cáp "
+            "ban công tại TP.HCM và Bình Dương."
+        ),
+        path="/gioi-thieu.html",
+        jsonld=schema.to_jsonld(
+            schema.local_business(site), schema.breadcrumb_list(crumbs)
+        ),
+        main_context={
+            "rail": components.numeric_rail(site.facts),
+            "usecases": usecases,
+        },
+    )
+
+
 def build(root: str = ROOT) -> list[str]:
     site = load_site()
-    return [build_home(site)]
+    return [
+        build_home(site),
+        build_services(site),
+        build_areas(site),
+        build_about(site),
+    ]
 
 
 def main() -> None:

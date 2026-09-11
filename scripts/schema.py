@@ -61,7 +61,9 @@ def service_schema(site: SiteData, service: Service) -> dict:
             "name": site.business.name,
             "telephone": site.business.phone,
         },
-        "areaServed": [{"@type": "Place", "name": area} for area in site.areas],
+        # Danh sách chuỗi thay vì object Place: vẫn hợp lệ và tránh lặp
+        # 7 khối Place cho mỗi trong 8 dịch vụ (trang phình thêm ~25 KB).
+        "areaServed": list(site.areas),
         "offers": {
             "@type": "Offer",
             "priceCurrency": "VND",

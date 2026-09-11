@@ -151,3 +151,92 @@ class TestHomepageImages(unittest.TestCase):
         for tag in tags[1:]:
             with self.subTest(tag=tag[:70]):
                 self.assertIn('loading="lazy"', tag)
+
+
+class TestServicesPage(unittest.TestCase):
+    def setUp(self):
+        self.html = read_output("dich-vu.html")
+
+    def test_all_eight_services_rendered(self):
+        self.assertEqual(self.html.count('class="card card--service"'), 8)
+
+    def test_grouped_into_the_three_categories(self):
+        # Sửa lỗi C6.
+        for group in ("Giàn phơi", "An toàn ban công", "Che chắn"):
+            with self.subTest(group=group):
+                self.assertIn(group, self.html)
+
+    def test_each_service_anchor_is_reachable(self):
+        for service in SITE.services:
+            with self.subTest(service=service.slug):
+                self.assertIn(f'id="{service.slug}"', self.html)
+
+    def test_has_comparison_table_in_scroll_container(self):
+        self.assertIn("table-scroll", self.html)
+        self.assertIn("<table", self.html)
+
+    def test_all_ten_faqs_live_here(self):
+        self.assertEqual(self.html.count('class="faq__question"'), 10)
+
+    def test_faq_page_schema_present(self):
+        self.assertIn("FAQPage", self.html)
+
+    def test_service_schema_for_every_service(self):
+        self.assertEqual(self.html.count('"@type": "Service"'), 8)
+
+    def test_breadcrumb_schema_present(self):
+        self.assertIn("BreadcrumbList", self.html)
+
+    def test_no_inline_style(self):
+        self.assertEqual(re.findall(r'\sstyle="', self.html), [])
+
+
+class TestAreasPage(unittest.TestCase):
+    """Thay du-an.html — spec §4.6."""
+
+    def setUp(self):
+        self.html = read_output("khu-vuc.html")
+
+    def test_old_projects_page_is_gone(self):
+        self.assertFalse(os.path.exists(os.path.join(ROOT, "du-an.html")))
+
+    def test_does_not_claim_stock_photos_are_completed_projects(self):
+        # Spec §2.2 — đây là lý do trang cũ bị đổi mục đích.
+        self.assertNotIn("Dự án đã thi công", self.html)
+        for stock in ("projects/thu-duc.jpg", "projects/quan-1.jpg",
+                      "projects/quan-7.jpg", "projects/thu-dau-mot.jpg"):
+            with self.subTest(stock=stock):
+                self.assertNotIn(stock, self.html)
+
+    def test_no_tel_link_on_project_cards(self):
+        # Sửa lỗi C5: thẻ dự án cũ link tới tel:.
+        for tag in re.findall(r'<a[^>]*href="tel:[^"]*"[^>]*>', self.html):
+            with self.subTest(tag=tag[:80]):
+                self.assertNotIn("card--project", tag)
+
+    def test_lists_every_service_area(self):
+        for area in SITE.areas:
+            with self.subTest(area=area):
+                self.assertIn(area, self.html)
+
+    def test_has_empty_project_grid_awaiting_real_photos(self):
+        self.assertIn('class="project-grid"', self.html)
+        self.assertIn("ảnh công trình thật", self.html.lower())
+
+    def test_no_inline_style(self):
+        self.assertEqual(re.findall(r'\sstyle="', self.html), [])
+
+
+class TestAboutPage(unittest.TestCase):
+    def setUp(self):
+        self.html = read_output("gioi-thieu.html")
+
+    def test_has_numeric_rail(self):
+        self.assertEqual(self.html.count('class="rail__item"'), 5)
+
+    def test_alt_text_describes_actual_image_content(self):
+        # Spec §2.2: bản cũ ghi "kỹ thuật viên lắp đặt" cho ảnh thợ mộc dùng MacBook.
+        self.assertNotIn("Kỹ thuật viên đang thao tác lắp đặt", self.html)
+
+    def test_no_inline_style(self):
+        self.assertEqual(re.findall(r'\sstyle="', self.html), [])
