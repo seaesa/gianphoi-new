@@ -44,7 +44,7 @@ assertion chạy trên HTML đã build.
 | `templates/` | Template từng trang; file bắt đầu bằng `_` là partial dùng chung |
 | `scripts/` | Build pipeline (`build.py`) và các module: dữ liệu, markdown, template engine, component, JSON-LD, ảnh, tương phản màu |
 | `assets/css/main.css` | Toàn bộ CSS, tổ chức bằng `@layer tokens, base, layout, components, utilities` |
-| `assets/svg/` | 8 hình vẽ nét sản phẩm, dùng cho 3 thẻ tình huống ở trang chủ |
+| `assets/svg/` | 8 hình vẽ nét sản phẩm — hiện **không hiển thị ở đâu**, giữ làm phương án dự phòng cho dịch vụ chưa có ảnh |
 | `assets/images/_src/site/` | Ảnh gốc, **không deploy** (đã chặn trong `robots.txt`) |
 
 ## Ảnh
@@ -53,7 +53,7 @@ assertion chạy trên HTML đã build.
 đã tối ưu. Thêm hoặc thay ảnh:
 
 ```bash
-# 1. bỏ ảnh gốc vào _src/site/{services,projects,blog}/ hoặc _src/site/
+# 1. bỏ ảnh gốc vào _src/site/{services,projects,usecases,blog}/ hoặc _src/site/
 # 2. sinh lại bản tối ưu
 python -m scripts.optimize_images
 # 3. khai báo trong site.json (photo / img / projects) rồi build lại

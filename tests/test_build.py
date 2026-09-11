@@ -98,6 +98,24 @@ class TestHomepageSections(unittest.TestCase):
         self.assertIn("Chọn loại giàn phù hợp", self.html)
         self.assertEqual(self.html.count('class="card card--usecase"'), 3)
 
+    def test_use_case_cards_show_space_context_photos(self):
+        """Ảnh ở đây phải là bối cảnh không gian, lấy từ thư mục riêng —
+        không dùng lại ảnh sản phẩm vì bảng giá ngay dưới đã có."""
+        imgs = re.findall(r'<img[^>]*src="/assets/images/usecases/[^"]*"', self.html)
+        self.assertEqual(len(imgs), 3)
+        for stem in ("ban-cong-chung-cu", "san-thuong-nha-pho", "nang-ha-tu-dong"):
+            with self.subTest(stem=stem):
+                self.assertIn(f"/assets/images/usecases/{stem}-", self.html)
+
+    def test_use_case_photos_differ_from_price_preview_photos(self):
+        service_photos = set(re.findall(r"/assets/images/services/([a-z-]+)-\d+\.webp",
+                                        self.html))
+        usecase_photos = set(re.findall(r"/assets/images/usecases/([a-z-]+)-\d+\.webp",
+                                        self.html))
+        self.assertTrue(service_photos)
+        self.assertTrue(usecase_photos)
+        self.assertEqual(service_photos & usecase_photos, set())
+
     def test_price_preview_shows_four_services_with_specs(self):
         self.assertEqual(self.html.count('class="card card--service"'), 4)
         self.assertEqual(self.html.count('class="spec-line"'), 4)

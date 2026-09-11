@@ -277,11 +277,29 @@ def footer_services(site: SiteData) -> str:
 # ---------------------------------------------------------------- use cases
 
 
-def usecase_card(title: str, body: str, service: Service, *, svg_inline: str) -> str:
-    """Tầng quyết định trên trang chủ — sửa lỗi C6."""
+def usecase_card(
+    title: str,
+    body: str,
+    service: Service,
+    *,
+    svg_inline: str | None = None,
+    photo_stem: str = "",
+    photo_alt: str = "",
+) -> str:
+    """Tầng quyết định trên trang chủ — sửa lỗi C6.
+
+    Dùng ảnh bối cảnh không gian (ban công chung cư, sân thượng…) chứ không
+    phải ảnh sản phẩm, vì bảng giá ngay bên dưới đã có ảnh sản phẩm rồi.
+    `svg_inline` là phương án dự phòng khi chưa có ảnh.
+    """
+    figure = (
+        photo(photo_stem, photo_alt, folder="usecases", sizes=CARD_SIZES)
+        if photo_stem
+        else (svg_inline or "")
+    )
     return (
         f'    <article class="card card--usecase">\n'
-        f'      <div class="card__figure">{svg_inline}</div>\n'
+        f'      <div class="card__figure card__figure--photo">{figure}</div>\n'
         f'      <div class="card__body">\n'
         f"        <h3>{escape(title)}</h3>\n"
         f"        <p>{escape(body)}</p>\n"

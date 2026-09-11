@@ -25,6 +25,7 @@ WIDTHS = (480, 960)
 FOLDERS = {
     "services": "services",
     "projects": "projects",
+    "usecases": "usecases",
     "blog": "blog",
     "": "",  # hero.jpg, team.jpg nằm ngay gốc
 }

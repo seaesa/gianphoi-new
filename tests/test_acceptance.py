@@ -217,6 +217,26 @@ class Criterion11NoFakeProjectClaims(unittest.TestCase):
                     self.assertNotIn(stock, html)
 
 
+class Criterion12IllustrationsAreRealPhotos(unittest.TestCase):
+    """Mọi hình minh hoạ là ảnh chụp thật; SVG chỉ còn dùng làm icon."""
+
+    def test_every_inline_svg_is_an_icon(self):
+        for path in all_pages():
+            html = visible(path)
+            with self.subTest(page=os.path.basename(path)):
+                self.assertEqual(
+                    html.count("<svg"), html.count('class="icon"'),
+                    "Còn SVG không phải icon — hình minh hoạ phải là ảnh thật",
+                )
+
+    def test_pages_with_illustrations_use_photos(self):
+        for name in ("index.html", "gioi-thieu.html", "dich-vu.html"):
+            html = visible(os.path.join(ROOT, name))
+            with self.subTest(page=name):
+                self.assertIn("/assets/images/", html)
+                self.assertIn("srcset=", html)
+
+
 class TestSitemapAndRobots(unittest.TestCase):
     def test_sitemap_lists_every_page(self):
         ensure_built()

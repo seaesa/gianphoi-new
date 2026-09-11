@@ -33,16 +33,25 @@ PROCESS_STEPS = [
 ]
 
 # Ba tình huống ở tầng quyết định trên trang chủ (sửa lỗi C6).
+# Ảnh ở đây là ảnh BỐI CẢNH KHÔNG GIAN, không phải ảnh sản phẩm — bảng giá
+# ngay bên dưới đã có ảnh sản phẩm nên dùng lại sẽ lặp.
+# (tiêu đề, mô tả, slug dịch vụ, ảnh, alt)
 USE_CASES = [
     ("Ban công chung cư nhỏ",
      "Gấp gọn sát tường, trả lại lối đi khi không dùng.",
-     "gian-phoi-xep-tuong"),
+     "gian-phoi-xep-tuong",
+     "ban-cong-chung-cu",
+     "Giàn phơi xếp gắn tường trên ban công căn hộ, phía sau là toà chung cư"),
     ("Sân thượng, nhà phố",
      "Hai thanh phơi inox 304, tải trọng tới 70 kg cho cả gia đình.",
-     "gian-phoi-treo-tran"),
+     "gian-phoi-treo-tran",
+     "san-thuong-nha-pho",
+     "Giàn phơi treo trần đầy móc áo, nhìn ra khu nhà ở phía xa"),
     ("Muốn nâng hạ tự động",
      "Điều khiển bằng remote, không cần quay tay.",
-     "gian-phoi-dieu-khien"),
+     "gian-phoi-dieu-khien",
+     "nang-ha-tu-dong",
+     "Giàn phơi điều khiển từ xa lắp dưới mái kính"),
 ]
 
 HOURS_DISPLAY = "08:00 – 18:00, tất cả các ngày"
@@ -122,9 +131,10 @@ def build_home(site: SiteData) -> str:
     featured = site.services[:4]
     usecases = "\n".join(
         components.usecase_card(
-            title, body, find_service(site, slug), svg_inline=read_svg(f"{slug}.svg")
+            title, body, find_service(site, slug),
+            photo_stem=stem, photo_alt=alt,
         )
-        for title, body, slug in USE_CASES
+        for title, body, slug, stem, alt in USE_CASES
     )
     cards = "\n".join(
         components.service_card(s, svg_inline=read_svg(s.svg)) for s in featured
@@ -255,9 +265,10 @@ def build_about(site: SiteData) -> str:
     crumbs = [("Trang chủ", "/"), ("Giới thiệu", "/gioi-thieu.html")]
     usecases = "\n".join(
         components.usecase_card(
-            title, body, find_service(site, slug), svg_inline=read_svg(f"{slug}.svg")
+            title, body, find_service(site, slug),
+            photo_stem=stem, photo_alt=alt,
         )
-        for title, body, slug in USE_CASES
+        for title, body, slug, stem, alt in USE_CASES
     )
     return render_page(
         site,
