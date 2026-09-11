@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/images/_src/
+
+Sitemap: https://gianphoithongminh.vn/sitemap.xml

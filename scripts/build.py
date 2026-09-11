@@ -419,6 +419,57 @@ def build_posts(site: SiteData) -> list[str]:
     return written
 
 
+STATIC_PAGES = (
+    ("index.html", "/", "1.0"),
+    ("dich-vu.html", "/dich-vu.html", "0.9"),
+    ("lien-he.html", "/lien-he.html", "0.9"),
+    ("khu-vuc.html", "/khu-vuc.html", "0.7"),
+    ("gioi-thieu.html", "/gioi-thieu.html", "0.7"),
+    ("blog.html", "/blog.html", "0.7"),
+)
+
+
+def build_sitemap(site: SiteData) -> str:
+    today = datetime.date.today().isoformat()
+    entries = [
+        (f"{schema.BASE_URL}{path}", today, priority, rel)
+        for rel, path, priority in STATIC_PAGES
+    ]
+    entries += [
+        (
+            f"{schema.BASE_URL}/blog/{post.slug}.html",
+            post.iso_date,
+            "0.6",
+            f"blog/{post.slug}.html",
+        )
+        for post in site.posts
+    ]
+
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for url, lastmod, priority, rel in entries:
+        lines += [
+            "  <url>",
+            f"    <loc>{url}</loc>",
+            f"    <lastmod>{lastmod}</lastmod>",
+            f"    <priority>{priority}</priority>",
+            f"    <!-- {rel} -->",
+            "  </url>",
+        ]
+    lines.append("</urlset>")
+    return _write(os.path.join(ROOT, "sitemap.xml"), "\n".join(lines) + "\n")
+
+
+def build_robots(site: SiteData) -> str:
+    body = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Disallow: /assets/images/_src/\n"
+        f"\nSitemap: {schema.BASE_URL}/sitemap.xml\n"
+    )
+    return _write(os.path.join(ROOT, "robots.txt"), body)
+
+
 def build(root: str = ROOT) -> list[str]:
     site = load_site()
     return [
@@ -429,6 +480,8 @@ def build(root: str = ROOT) -> list[str]:
         build_contact(site),
         build_blog_index(site),
         *build_posts(site),
+        build_sitemap(site),
+        build_robots(site),
     ]
 
 
