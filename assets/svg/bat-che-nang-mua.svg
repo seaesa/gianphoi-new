@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img"
+     fill="none" stroke="currentColor" stroke-width="1.5"
+     stroke-linecap="round" stroke-linejoin="round">
+  <title>Bạt che nắng mưa tự cuốn: trục cuốn gắn trên cao, bạt thả xuống có thanh nặng và dây kéo</title>
+  <line x1="24" y1="26" x2="216" y2="26"/>
+  <rect x="40" y="30" width="160" height="20" rx="10"/>
+  <line x1="60" y1="30" x2="60" y2="50"/>
+  <line x1="180" y1="30" x2="180" y2="50"/>
+  <path d="M52 50v86M188 50v86"/>
+  <path d="M52 136h136"/>
+  <rect x="46" y="136" width="148" height="10" rx="5"/>
+  <path d="M76 50v86M100 50v86M124 50v86M148 50v86M172 50v86" stroke-dasharray="3 8"/>
+  <circle cx="208" cy="40" r="7"/>
+  <line x1="208" y1="47" x2="208" y2="130"/>
+  <circle cx="208" cy="136" r="5"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img"
+     fill="none" stroke="currentColor" stroke-width="1.5"
+     stroke-linecap="round" stroke-linejoin="round">
+  <title>Mái hiên quay tay: khung sắt gắn tường đỡ tấm bạt nghiêng có thanh trước, thu mở bằng tay quay</title>
+  <line x1="32" y1="20" x2="32" y2="164"/>
+  <path d="M32 30l-8 -8M32 50l-8 -8M32 70l-8 -8M32 90l-8 -8M32 110l-8 -8M32 130l-8 -8M32 150l-8 -8"/>
+  <rect x="32" y="34" width="14" height="12" rx="2"/>
+  <path d="M46 40L204 96v18L46 58z"/>
+  <path d="M84 53v18M122 67v18M160 80v18" stroke-dasharray="3 5"/>
+  <path d="M204 114v16"/>
+  <path d="M204 130q-8 6 -16 0q-8 -6 -16 0" />
+  <path d="M46 78l158 34" stroke-dasharray="5 5"/>
+  <line x1="46" y1="58" x2="46" y2="78"/>
+  <line x1="58" y1="62" x2="58" y2="134"/>
+  <circle cx="58" cy="140" r="6"/>
+  <line x1="58" y1="140" x2="64" y2="146"/>
+</svg>

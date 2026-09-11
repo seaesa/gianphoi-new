@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img"
+     fill="none" stroke="currentColor" stroke-width="1.5"
+     stroke-linecap="round" stroke-linejoin="round">
+  <title>Lưới cáp ban công inox: lan can với hệ cáp đan chéo và tăng đơ căng cáp</title>
+  <line x1="24" y1="40" x2="216" y2="40"/>
+  <line x1="24" y1="148" x2="216" y2="148"/>
+  <line x1="32" y1="40" x2="32" y2="148"/>
+  <line x1="120" y1="40" x2="120" y2="148"/>
+  <line x1="208" y1="40" x2="208" y2="148"/>
+  <path d="M32 148l88 -108M120 148l88 -108M120 40l88 108M32 40l88 108"/>
+  <path d="M76 94l44 54M76 94l44 -54M164 94l44 54M164 94l44 -54"/>
+  <rect x="112" y="86" width="16" height="16" rx="2"/>
+  <circle cx="32" cy="40" r="3"/>
+  <circle cx="208" cy="40" r="3"/>
+</svg>

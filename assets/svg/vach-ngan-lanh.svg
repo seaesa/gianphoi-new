@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img"
+     fill="none" stroke="currentColor" stroke-width="1.5"
+     stroke-linecap="round" stroke-linejoin="round">
+  <title>Vách ngăn lạnh điều hoà: khung cửa treo các dải nhựa PVC trong suốt giữ nhiệt</title>
+  <rect x="40" y="24" width="160" height="134" rx="2"/>
+  <line x1="40" y1="40" x2="200" y2="40"/>
+  <circle cx="60" cy="32" r="3"/>
+  <circle cx="120" cy="32" r="3"/>
+  <circle cx="180" cy="32" r="3"/>
+  <path d="M56 40v118M76 40v118M96 40v118M116 40v118M136 40v118M156 40v118M176 40v118"/>
+  <path d="M66 40v112M86 40v112M106 40v112M126 40v112M146 40v112M166 40v112" stroke-dasharray="3 7"/>
+</svg>
