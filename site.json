@@ -1,0 +1,339 @@
+{
+  "business": {
+    "name": "Giàn Phơi Thông Minh Bình Dương & TP.HCM",
+    "tagline": "Đơn vị chuyên lắp đặt & sửa chữa giàn phơi thông minh, lưới cáp ban công uy tín tại TP.HCM & Bình Dương.",
+    "phone": "+84902725760",
+    "phone_display": "0902.725.760",
+    "zalo_url": "https://zalo.me/0902725760",
+    "email": "daihoaphat999@gmail.com",
+    "street": "Đường 48, khu phố 6, Hiệp Bình Chánh",
+    "city": "TP Hồ Chí Minh",
+    "hours": "Mo-Su 08:00-18:00",
+    "maps_query": "Hiệp Bình Chánh, TP Hồ Chí Minh"
+  },
+
+  "facts": [
+    ["10+", "năm kinh nghiệm"],
+    ["1000+", "công trình đã bàn giao"],
+    ["70 kg", "tải trọng tối đa"],
+    ["8", "dịch vụ chuyên biệt"],
+    ["24/7", "hỗ trợ kỹ thuật"]
+  ],
+
+  "areas": [
+    "Thủ Đức",
+    "Quận 1",
+    "Quận 3",
+    "Quận 7",
+    "Dĩ An",
+    "Thủ Dầu Một",
+    "Bình Dương"
+  ],
+
+  "services": [
+    {
+      "slug": "gian-phoi-dieu-khien",
+      "name": "Giàn Phơi Thông Minh Điều Khiển",
+      "group": "Giàn phơi",
+      "price_from": 3200000,
+      "price_to": 4500000,
+      "unit": "bộ",
+      "blurb": "Điều khiển bằng remote, sang trọng, tiết kiệm diện tích.",
+      "popular": false,
+      "svg": "gian-phoi-dieu-khien.svg",
+      "specs": [
+        { "label": "Vận hành", "value": "Remote điều khiển" },
+        { "label": "Ưu điểm", "value": "Tiết kiệm diện tích" },
+        { "label": "Bảo hành", "value": "5 năm" }
+      ]
+    },
+    {
+      "slug": "gian-phoi-treo-tran",
+      "name": "Giàn Phơi Treo Trần Quay Tay",
+      "group": "Giàn phơi",
+      "price_from": 2000000,
+      "price_to": 3500000,
+      "unit": "bộ",
+      "blurb": "Hòa Phát chính hãng, inox 304, nhiều màu lựa chọn.",
+      "popular": true,
+      "svg": "gian-phoi-treo-tran.svg",
+      "specs": [
+        { "label": "Chất liệu", "value": "Inox 304" },
+        { "label": "Tải trọng", "value": "Tới 70 kg" },
+        { "label": "Bảo hành", "value": "Liên hệ" }
+      ]
+    },
+    {
+      "slug": "gian-phoi-xep-tuong",
+      "name": "Giàn Phơi Xếp Gắn Tường",
+      "group": "Giàn phơi",
+      "price_from": 1800000,
+      "price_to": 3000000,
+      "unit": "bộ",
+      "blurb": "Inox 304, gấp gọn sát tường, tiết kiệm không gian.",
+      "popular": false,
+      "svg": "gian-phoi-xep-tuong.svg",
+      "specs": [
+        { "label": "Chất liệu", "value": "Inox 304" },
+        { "label": "Ưu điểm", "value": "Gấp gọn sát tường" },
+        { "label": "Bảo hành", "value": "5 năm" }
+      ]
+    },
+    {
+      "slug": "luoi-cap-ban-cong",
+      "name": "Lưới Cáp Ban Công Inox",
+      "group": "An toàn ban công",
+      "price_from": 180000,
+      "price_to": 250000,
+      "unit": "m²",
+      "blurb": "Chất liệu inox cao cấp, an toàn cho trẻ nhỏ.",
+      "popular": false,
+      "svg": "luoi-cap-ban-cong.svg",
+      "specs": [
+        { "label": "Chất liệu", "value": "Inox cao cấp" },
+        { "label": "An toàn", "value": "Cho trẻ nhỏ, vật nuôi" },
+        { "label": "Bảo hành", "value": "3 năm" }
+      ]
+    },
+    {
+      "slug": "cua-luoi-chong-muoi",
+      "name": "Cửa Lưới Chống Muỗi",
+      "group": "An toàn ban công",
+      "price_from": 450000,
+      "price_to": 600000,
+      "unit": "m²",
+      "blurb": "Khung nhôm cao cấp, lưới sợi thủy tinh chống cháy.",
+      "popular": false,
+      "svg": "cua-luoi-chong-muoi.svg",
+      "specs": [
+        { "label": "Khung", "value": "Nhôm cao cấp" },
+        { "label": "Lưới", "value": "Sợi thủy tinh chống cháy" },
+        { "label": "Bảo hành", "value": "Liên hệ" }
+      ]
+    },
+    {
+      "slug": "vach-ngan-lanh",
+      "name": "Vách Ngăn Lạnh Điều Hoà",
+      "group": "Che chắn",
+      "price_from": 350000,
+      "price_to": 500000,
+      "unit": "m²",
+      "blurb": "Giữ nhiệt hiệu quả, tiết kiệm điện năng, ngăn bụi & côn trùng.",
+      "popular": false,
+      "svg": "vach-ngan-lanh.svg",
+      "specs": [
+        { "label": "Công dụng", "value": "Giữ nhiệt, ngăn bụi" },
+        { "label": "Ứng dụng", "value": "Văn phòng, nhà xưởng" },
+        { "label": "Bảo hành", "value": "Liên hệ" }
+      ]
+    },
+    {
+      "slug": "mai-hien-quay-tay",
+      "name": "Mái Hiên Quay Tay",
+      "group": "Che chắn",
+      "price_from": 700000,
+      "price_to": 950000,
+      "unit": "m²",
+      "blurb": "Khung sắt sơn tĩnh điện, vải bạt cao cấp chống tia UV.",
+      "popular": false,
+      "svg": "mai-hien-quay-tay.svg",
+      "specs": [
+        { "label": "Khung", "value": "Sắt sơn tĩnh điện" },
+        { "label": "Vật liệu", "value": "Vải bạt chống tia UV" },
+        { "label": "Bảo hành", "value": "Liên hệ" }
+      ]
+    },
+    {
+      "slug": "bat-che-nang-mua",
+      "name": "Bạt Che Nắng Mưa Tự Cuốn",
+      "group": "Che chắn",
+      "price_from": 850000,
+      "price_to": 1200000,
+      "unit": "m²",
+      "blurb": "Hệ thống cuốn tự động, che nắng chắn mưa hiệu quả.",
+      "popular": false,
+      "svg": "bat-che-nang-mua.svg",
+      "specs": [
+        { "label": "Vận hành", "value": "Cuốn tự động" },
+        { "label": "Ứng dụng", "value": "Ban công, sân thượng" },
+        { "label": "Bảo hành", "value": "Liên hệ" }
+      ]
+    }
+  ],
+
+  "faqs": [
+    {
+      "question": "Giàn phơi thông minh có điều khiển từ xa không?",
+      "answer": "Có. Các mẫu giàn phơi thông minh đều được trang bị điều khiển từ xa, giúp nâng hạ dễ dàng, tiết kiệm sức lực và mang tính thẩm mỹ cao.",
+      "contact_page": false
+    },
+    {
+      "question": "Lưới cáp ban công có an toàn cho trẻ em không?",
+      "answer": "Hoàn toàn an toàn. Lưới cáp ban công được làm từ inox 304 cao cấp, có độ bền cao, chịu tải tốt và được kiểm định chất lượng, bảo vệ trẻ em và vật nuôi.",
+      "contact_page": false
+    },
+    {
+      "question": "Cửa lưới chống muỗi có thể đóng mở dễ dàng không?",
+      "answer": "Có. Cửa lưới được thiết kế linh hoạt, dễ dàng kéo mở hoặc tự cuốn lại, phù hợp nhiều loại cửa sổ và cửa ra vào.",
+      "contact_page": false
+    },
+    {
+      "question": "Giàn phơi treo trần chịu được trọng lượng bao nhiêu?",
+      "answer": "Tùy mẫu mã, giàn phơi treo trần có thể chịu tải từ 60kg đến 90kg, đủ để phơi quần áo cho cả gia đình.",
+      "contact_page": false
+    },
+    {
+      "question": "Thời gian lắp đặt giàn phơi mất bao lâu?",
+      "answer": "Thời gian lắp đặt thường từ 1–2 giờ cho loại tiêu chuẩn và khoảng 1–2 ngày cho giàn phơi đo theo yêu cầu.",
+      "contact_page": true
+    },
+    {
+      "question": "Lưới cáp có bền không và bảo hành bao lâu?",
+      "answer": "Lưới cáp làm từ inox 304 bền bỉ, chịu thời tiết tốt, bảo hành từ 12–36 tháng tùy sản phẩm và đơn vị thi công.",
+      "contact_page": true
+    },
+    {
+      "question": "Cửa lưới có cần bảo trì thường xuyên không?",
+      "answer": "Có. Nên vệ sinh cửa định kỳ để đảm bảo độ bền và khả năng chống muỗi tốt nhất, đồng thời kiểm tra cơ cấu vận hành để tránh hư hỏng.",
+      "contact_page": false
+    },
+    {
+      "question": "Giàn phơi xếp gọn có phù hợp cho chung cư không?",
+      "answer": "Hoàn toàn phù hợp. Giàn phơi xếp gọn tiết kiệm diện tích, phù hợp với căn hộ, đảm bảo tính thẩm mỹ và tiện lợi.",
+      "contact_page": false
+    },
+    {
+      "question": "Dịch vụ có hỗ trợ đo đạc miễn phí không?",
+      "answer": "Có. Chúng tôi hỗ trợ đo đạc miễn phí tại nhà để đảm bảo sản phẩm phù hợp và vừa vặn nhất với không gian của bạn.",
+      "contact_page": true
+    },
+    {
+      "question": "Tôi có thể đặt giàn phơi theo kích thước riêng không?",
+      "answer": "Có. Chúng tôi nhận thiết kế và sản xuất giàn phơi theo kích thước riêng, đảm bảo vừa vặn và thẩm mỹ cho công trình của bạn.",
+      "contact_page": true
+    }
+  ],
+
+  "posts": [
+    {
+      "slug": "quan-3",
+      "title": "Lắp đặt giàn phơi thông minh chính hãng quận 3 TP HCM giá rẻ",
+      "date": "29/5/2026",
+      "iso_date": "2026-05-29",
+      "img": "quan-3.webp",
+      "desc": "Hướng dẫn lắp đặt giàn phơi thông minh chính hãng giá rẻ tại Quận 3 TP.HCM, quy trình 4 bước và bảng giá tham khảo.",
+      "category": "Khu vực",
+      "source": "docs/research/blog-raw/quan-3.txt"
+    },
+    {
+      "slug": "di-an",
+      "title": "Lắp đặt giàn phơi thông minh chính hãng tại phường Dĩ An TPHCM (Bình Dương cũ)",
+      "date": "28/5/2026",
+      "iso_date": "2026-05-28",
+      "img": "di-an.webp",
+      "desc": "Dịch vụ lắp đặt giàn phơi thông minh, lưới cáp ban công và cửa lưới chống muỗi chính hãng tại Dĩ An, TP.HCM.",
+      "category": "Khu vực",
+      "source": "docs/research/blog-raw/di-an.txt"
+    },
+    {
+      "slug": "quan-1",
+      "title": "Lắp đặt giàn phơi thông minh chính hãng quận 1 TPHCM",
+      "date": "27/5/2026",
+      "iso_date": "2026-05-27",
+      "img": "quan-1.webp",
+      "desc": "Tiêu chí chọn đơn vị lắp đặt giàn phơi thông minh uy tín tại Quận 1, quy trình thi công và bảng giá tham khảo.",
+      "category": "Khu vực",
+      "source": "docs/research/blog-raw/quan-1.txt"
+    },
+    {
+      "slug": "mui-hoi",
+      "title": "Cách giải quyết quần áo phơi trong nhà có mùi hôi",
+      "date": "19/10/2025",
+      "iso_date": "2025-10-19",
+      "img": "mui-hoi.webp",
+      "desc": "10 cách khử mùi hôi quần áo phơi trong nhà hiệu quả, cùng gợi ý các dòng giàn phơi thông minh phù hợp cho chung cư.",
+      "category": "Kiến thức",
+      "source": "docs/research/blog-raw/mui-hoi.txt"
+    },
+    {
+      "slug": "chung-cu",
+      "title": "Giàn phơi thông minh cho chung cư: Giải pháp hiện đại tối ưu không gian sống năm 2025",
+      "date": "18/10/2025",
+      "iso_date": "2025-10-18",
+      "img": "chung-cu.webp",
+      "desc": "Phân loại, tiêu chí chọn mua và bảng giá tham khảo giàn phơi thông minh cho căn hộ chung cư năm 2025.",
+      "category": "Kiến thức",
+      "source": "docs/research/blog-raw/chung-cu.txt"
+    },
+    {
+      "slug": "mua-mua",
+      "title": "Mùa mưa Sài Gòn và giải pháp bạt che nắng mưa cho mọi nhà",
+      "date": "18/10/2025",
+      "iso_date": "2025-10-18",
+      "img": "mua-mua.webp",
+      "desc": "Các loại bạt che nắng mưa phổ biến và mẹo chọn bạt che phù hợp cho mùa mưa tại TP.HCM.",
+      "category": "Kiến thức",
+      "source": "docs/research/blog-raw/mua-mua.txt"
+    },
+    {
+      "slug": "top5-thuong-hieu",
+      "title": "Top 5 thương hiệu giàn phơi thông minh uy tín nhất Việt Nam",
+      "date": "17/10/2025",
+      "iso_date": "2025-10-17",
+      "img": "top5-thuong-hieu.webp",
+      "desc": "Đánh giá 5 thương hiệu giàn phơi thông minh uy tín: Sankaku, Hoseta, Hòa Phát, Việt Nhật, Larano.",
+      "category": "So sánh",
+      "source": "docs/research/blog-raw/top5-thuong-hieu.txt"
+    },
+    {
+      "slug": "top5-mau",
+      "title": "Top 5 mẫu giàn phơi thông minh mới nhất năm 2025",
+      "date": "17/10/2025",
+      "iso_date": "2025-10-17",
+      "img": "top5-mau.webp",
+      "desc": "Điểm qua 5 mẫu giàn phơi thông minh đáng mua nhất năm 2025 kèm giá tham khảo.",
+      "category": "So sánh",
+      "source": "docs/research/blog-raw/top5-mau.txt"
+    },
+    {
+      "slug": "vach-lanh",
+      "title": "Dịch Vụ Lắp Đặt Vách Lạnh Ngăn Điều Hòa Tại Bình Dương",
+      "date": "16/10/2025",
+      "iso_date": "2025-10-16",
+      "img": "vach-lanh.webp",
+      "desc": "Lợi ích, ứng dụng thực tế, quy trình và báo giá lắp đặt vách lạnh ngăn điều hòa tại Bình Dương.",
+      "category": "Khu vực",
+      "source": "docs/research/blog-raw/vach-lanh.txt"
+    },
+    {
+      "slug": "giai-phap-khong-gian",
+      "title": "Giải pháp giàn phơi thông minh phù hợp cho từng không gian",
+      "date": "16/10/2025",
+      "iso_date": "2025-10-16",
+      "img": "giai-phap-khong-gian.webp",
+      "desc": "Giải pháp giàn phơi thông minh theo từng loại không gian: chung cư, nhà phố, biệt thự, ban công nhỏ.",
+      "category": "Kiến thức",
+      "source": "docs/research/blog-raw/giai-phap-khong-gian.txt"
+    },
+    {
+      "slug": "top10-don-vi",
+      "title": "Top 10 đơn vị lắp đặt giàn phơi thông minh uy tín ở Bình Dương & TP.HCM",
+      "date": "16/10/2025",
+      "iso_date": "2025-10-16",
+      "img": "top10-don-vi.webp",
+      "desc": "Danh sách 10 đơn vị lắp đặt giàn phơi thông minh được khách hàng tin tưởng tại Bình Dương & TP.HCM.",
+      "category": "So sánh",
+      "source": "docs/research/blog-raw/top10-don-vi.txt"
+    },
+    {
+      "slug": "nhan-biet-chinh-hang",
+      "title": "Cách Nhận Biết Giàn Phơi Thông Minh Chính Hãng",
+      "date": "15/10/2025",
+      "iso_date": "2025-10-15",
+      "img": "nhan-biet-chinh-hang.webp",
+      "desc": "Hướng dẫn nhận biết giàn phơi thông minh chính hãng qua bao bì, chất liệu, logo, hóa đơn bảo hành.",
+      "category": "So sánh",
+      "source": "docs/research/blog-raw/nhan-biet-chinh-hang.txt"
+    }
+  ]
+}

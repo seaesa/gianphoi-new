@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img"
+     fill="none" stroke="currentColor" stroke-width="1.5"
+     stroke-linecap="round" stroke-linejoin="round">
+  <title>Giàn phơi thông minh điều khiển từ xa: hộp motor gắn trần nâng hạ hai thanh phơi, vận hành bằng remote</title>
+  <line x1="20" y1="26" x2="176" y2="26"/>
+  <path d="M24 26l-6 -8M44 26l-6 -8M64 26l-6 -8M84 26l-6 -8"/>
+  <rect x="78" y="26" width="56" height="20" rx="3"/>
+  <line x1="88" y1="33" x2="124" y2="33"/>
+  <line x1="88" y1="39" x2="124" y2="39"/>
+  <line x1="92" y1="46" x2="92" y2="94"/>
+  <line x1="120" y1="46" x2="120" y2="120"/>
+  <line x1="40" y1="94" x2="172" y2="94"/>
+  <line x1="40" y1="88" x2="40" y2="100"/>
+  <line x1="172" y1="88" x2="172" y2="100"/>
+  <line x1="40" y1="120" x2="172" y2="120"/>
+  <line x1="40" y1="114" x2="40" y2="126"/>
+  <line x1="172" y1="114" x2="172" y2="126"/>
+  <path d="M50 94h22v34h-22z"/>
+  <path d="M144 94l-8 6v10l6 -2v22h20v-22l6 2v-10l-8 -6z"/>
+  <path d="M84 120h20v30h-20z"/>
+  <rect x="188" y="86" width="30" height="54" rx="6"/>
+  <circle cx="203" cy="102" r="4"/>
+  <line x1="196" y1="118" x2="210" y2="118"/>
+  <line x1="196" y1="128" x2="210" y2="128"/>
+  <path d="M198 76a9 9 0 0 1 10 0M194 68a19 19 0 0 1 18 0"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img"
+     fill="none" stroke="currentColor" stroke-width="1.5"
+     stroke-linecap="round" stroke-linejoin="round">
+  <title>Giàn phơi xếp gắn tường: khung inox nhiều thanh phơi, mở ra khi dùng và gấp gọn sát tường khi không dùng</title>
+  <line x1="36" y1="20" x2="36" y2="164"/>
+  <path d="M36 30l-8 -8M36 50l-8 -8M36 70l-8 -8M36 90l-8 -8M36 110l-8 -8M36 130l-8 -8M36 150l-8 -8"/>
+  <rect x="36" y="52" width="10" height="72" rx="2"/>
+  <circle cx="46" cy="60" r="3"/>
+  <circle cx="46" cy="116" r="3"/>
+  <rect x="46" y="52" width="8" height="72" rx="2" stroke-dasharray="4 4"/>
+  <path d="M66 52h114v72H66z"/>
+  <line x1="66" y1="70" x2="180" y2="70"/>
+  <line x1="66" y1="88" x2="180" y2="88"/>
+  <line x1="66" y1="106" x2="180" y2="106"/>
+  <line x1="54" y1="60" x2="66" y2="56"/>
+  <line x1="54" y1="116" x2="66" y2="120"/>
+  <path d="M88 70h20v30h-20z"/>
+  <path d="M146 88l-8 6v10l6 -2v22h20v-22l6 2v-10l-8 -6z"/>
+  <path d="M196 58a44 44 0 0 1 0 60" stroke-dasharray="5 6"/>
+  <path d="M196 118l-5 -7M196 118l7 -4"/>
+</svg>

@@ -1,0 +1,72 @@
+  <div class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Đường dẫn">
+        <a href="/index.html">Trang chủ</a>
+        <span aria-hidden="true">/</span>
+        <span>Khu vực phục vụ</span>
+      </nav>
+      <h1>Khu vực phục vụ</h1>
+      <p>Đội kỹ thuật nhận khảo sát và thi công tại TP.HCM và Bình Dương. Gọi hotline để kiểm tra lịch trống cho khu vực của bạn.</p>
+    </div>
+  </div>
+
+  <section class="band band--paper">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Đang nhận công trình</span>
+        <h2>Các quận, phường đã và đang phục vụ</h2>
+      </div>
+{{{ areas }}}
+      <div class="cluster mt-7">
+        <a class="btn btn--primary" href="tel:{{ phone }}" data-action="call">{{{ icon_phone }}} Gọi {{ phone_display }}</a>
+        <a class="btn btn--ghost" href="{{ zalo_url }}" target="_blank" rel="noopener">Nhắn Zalo hỏi lịch</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Hình ảnh công trình</span>
+        <h2>Ảnh thi công thực tế</h2>
+        <p>Khu vực này dành cho ảnh chụp tại công trình đã bàn giao. Chúng tôi chỉ đăng ảnh do đội kỹ thuật chụp thực tế, không dùng ảnh minh hoạ.</p>
+      </div>
+
+      <!-- HƯỚNG DẪN THÊM ẢNH CÔNG TRÌNH THẬT
+           Thả ảnh công trình thật vào grid bên dưới. Mỗi mục theo mẫu:
+
+           <figure class="card card--project">
+             <img src="/assets/images/projects/<ten-file>.webp"
+                  alt="<mô tả đúng thứ có trong ảnh>"
+                  width="640" height="480" loading="lazy" decoding="async">
+             <figcaption>Địa điểm · Hạng mục · Thời gian thi công</figcaption>
+           </figure>
+
+           Quy tắc: không dùng ảnh stock, không gắn link tel: lên thẻ,
+           alt phải mô tả đúng nội dung ảnh. -->
+      <div class="project-grid" data-empty="Chưa có ảnh công trình thật để đăng."></div>
+    </div>
+  </section>
+
+  <section class="band band--paper">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Vị trí</span>
+        <h2>Xưởng &amp; văn phòng</h2>
+        <p>{{ street }}, {{ city }}</p>
+      </div>
+      <div class="map-embed">
+        <iframe src="{{ map_src }}" loading="lazy" title="Bản đồ vị trí {{ business_name }}"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--tight band--steel">
+    <div class="container cta">
+      <div>
+        <h2>Muốn công trình tiếp theo là của bạn?</h2>
+        <p>Đội ngũ kỹ thuật khảo sát &amp; báo giá miễn phí.</p>
+      </div>
+      <a class="btn btn--primary" href="/lien-he.html">Liên hệ khảo sát</a>
+    </div>
+  </section>

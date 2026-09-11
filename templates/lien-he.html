@@ -1,0 +1,114 @@
+  <div class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Đường dẫn">
+        <a href="/index.html">Trang chủ</a>
+        <span aria-hidden="true">/</span>
+        <span>Liên hệ</span>
+      </nav>
+      <h1>Nhận báo giá</h1>
+      <p>Gọi hoặc nhắn Zalo là nhanh nhất. Nếu tiện hơn, để lại bốn thông tin bên dưới, chúng tôi gọi lại cho bạn.</p>
+    </div>
+  </div>
+
+  <section class="band band--tight band--surface">
+    <div class="container">
+      <div class="grid grid--3">
+        <a class="card" href="tel:{{ phone }}" data-action="call">
+          <div class="card__body">
+            {{{ icon_phone }}}
+            <h2>Gọi hotline</h2>
+            <p class="card__price">{{ phone_display }}</p>
+            <p class="muted">Nhanh nhất, có người trực trong giờ làm việc.</p>
+          </div>
+        </a>
+        <a class="card" href="{{ zalo_url }}" target="_blank" rel="noopener">
+          <div class="card__body">
+            {{{ icon_zalo }}}
+            <h2>Nhắn Zalo</h2>
+            <p class="card__price">{{ phone_display }}</p>
+            <p class="muted">Gửi ảnh ban công để được ước lượng trước.</p>
+          </div>
+        </a>
+        <a class="card" href="mailto:{{ email }}">
+          <div class="card__body">
+            {{{ icon_quote }}}
+            <h2>Gửi email</h2>
+            <p class="card__price">{{ email }}</p>
+            <p class="muted">Phù hợp cho công trình lớn cần báo giá văn bản.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--paper">
+    <div class="container">
+      <div class="grid grid--2">
+        <div>
+          <div class="section-head">
+            <span class="eyebrow">Form báo giá</span>
+            <h2>Để lại thông tin, chúng tôi gọi lại</h2>
+            <p>Chỉ bốn trường. Kỹ thuật viên sẽ liên hệ để hẹn lịch khảo sát miễn phí.</p>
+          </div>
+
+          <form class="form" id="quote-form" novalidate>
+            <p class="form__success" id="quote-form-success" hidden>Cảm ơn bạn! Yêu cầu đã được ghi nhận, chúng tôi sẽ liên hệ lại sớm nhất.</p>
+
+            <div class="field">
+              <label for="name">Họ và tên</label>
+              <input type="text" id="name" name="name" autocomplete="name" required aria-describedby="name-error">
+              <p class="field__error" id="name-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="phone">Số điện thoại</label>
+              <input type="tel" id="phone" name="phone" inputmode="numeric" autocomplete="tel" required aria-describedby="phone-error">
+              <p class="field__error" id="phone-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="area">Khu vực</label>
+              <input type="text" id="area" name="area" autocomplete="address-level2" placeholder="Thủ Đức, Quận 7, Dĩ An…" aria-describedby="area-error">
+              <p class="field__error" id="area-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="service">Dịch vụ quan tâm</label>
+              <select id="service" name="service" aria-describedby="service-error">
+{{{ service_options }}}
+              </select>
+              <p class="field__error" id="service-error" aria-live="polite"></p>
+            </div>
+
+            <button class="btn btn--primary btn--block" type="submit">Gửi yêu cầu báo giá</button>
+            <p class="form__note">Thông tin chỉ dùng để liên hệ báo giá, không chia sẻ cho bên thứ ba.</p>
+          </form>
+        </div>
+
+        <div>
+          <div class="section-head">
+            <span class="eyebrow">Địa chỉ</span>
+            <h2>Xưởng &amp; văn phòng</h2>
+            <p>{{ street }}, {{ city }}</p>
+          </div>
+          <div class="map-embed">
+            <iframe src="{{ map_src }}" loading="lazy" title="Bản đồ vị trí {{ business_name }}"></iframe>
+          </div>
+          <p class="form__note mt-6">Giờ làm việc: {{ hours_display }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Trước khi gọi</span>
+        <h2>Bốn câu hỏi hay gặp nhất</h2>
+      </div>
+{{{ faqs }}}
+      <div class="cluster mt-7">
+        <a class="btn btn--ghost" href="/dich-vu.html#faq">Xem tất cả câu hỏi</a>
+      </div>
+    </div>
+  </section>

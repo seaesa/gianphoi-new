@@ -1,0 +1,40 @@
+  <div class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Đường dẫn">
+        <a href="/index.html">Trang chủ</a>
+        <span aria-hidden="true">/</span>
+        <span>Blog</span>
+      </nav>
+      <h1>Kiến thức chọn và dùng giàn phơi</h1>
+      <p>Kinh nghiệm chọn mua, so sánh thương hiệu và hướng dẫn theo từng khu vực.</p>
+    </div>
+  </div>
+
+  <section class="band band--paper">
+    <div class="container">
+      <div class="cluster" role="group" aria-label="Lọc theo chủ đề">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">Tất cả</button>
+        <button class="chip" type="button" data-filter="Khu vực" aria-pressed="false">Khu vực</button>
+        <button class="chip" type="button" data-filter="Kiến thức" aria-pressed="false">Kiến thức</button>
+        <button class="chip" type="button" data-filter="So sánh" aria-pressed="false">So sánh</button>
+      </div>
+
+      <div class="grid grid--3 mt-7" id="post-grid">
+{{{ posts }}}
+      </div>
+      <p class="form__note mt-6" id="post-empty" hidden>Không có bài viết nào trong chủ đề này.</p>
+    </div>
+  </section>
+
+  <section class="band band--tight band--steel">
+    <div class="container cta">
+      <div>
+        <h2>Cần tư vấn cho đúng không gian nhà bạn?</h2>
+        <p>Gọi hoặc nhắn Zalo, kỹ thuật viên sẽ gợi ý loại giàn phù hợp.</p>
+      </div>
+      <div class="cluster">
+        <a class="btn btn--on-steel" href="tel:{{ phone }}" data-action="call">{{{ icon_phone }}} {{ phone_display }}</a>
+        <a class="btn btn--primary" href="/lien-he.html">Nhận báo giá</a>
+      </div>
+    </div>
+  </section>
