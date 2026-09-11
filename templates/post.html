@@ -1,0 +1,54 @@
+  <div class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Đường dẫn">
+        <a href="/index.html">Trang chủ</a>
+        <span aria-hidden="true">/</span>
+        <a href="/blog.html">Blog</a>
+        <span aria-hidden="true">/</span>
+        <span>{{ category }}</span>
+      </nav>
+      <h1>{{ post_title }}</h1>
+      <p><time datetime="{{ iso_date }}">{{ date }}</time> · {{ business_name }}</p>
+    </div>
+  </div>
+
+  <section class="band band--paper">
+    <div class="container article-layout">
+      <div>
+        <figure class="article__cover">
+          <img class="cover" src="/assets/images/blog/{{ img }}" alt="{{ post_title }}" width="960" height="540" loading="lazy" decoding="async">
+        </figure>
+
+{{{ toc }}}
+
+        <article class="article">
+{{{ body }}}
+        </article>
+      </div>
+
+      <aside class="quote-aside" aria-label="Nhận báo giá">
+        <h2>Cần báo giá cho nhà bạn?</h2>
+        <p>Khảo sát miễn phí tại TP.HCM và Bình Dương. Gọi hoặc nhắn Zalo để được tư vấn ngay.</p>
+        <a class="quote-aside__phone" href="tel:{{ phone }}">{{ phone_display }}</a>
+        <a class="btn btn--primary btn--block" href="/lien-he.html">Nhận báo giá miễn phí</a>
+        <a class="btn btn--on-steel btn--block" href="{{ zalo_url }}" target="_blank" rel="noopener">Nhắn Zalo</a>
+
+        <h3>{{ related_name }}</h3>
+        <p>{{ related_price }}</p>
+{{{ related_specs }}}
+        <a class="btn btn--on-steel btn--block" href="/dich-vu.html#{{ related_slug }}">Xem chi tiết dịch vụ</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Đọc thêm</span>
+        <h2>Bài viết khác</h2>
+      </div>
+      <div class="grid grid--3">
+{{{ related_posts }}}
+      </div>
+    </div>
+  </section>

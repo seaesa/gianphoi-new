@@ -295,3 +295,72 @@ class TestContactPage(unittest.TestCase):
 
     def test_no_inline_style(self):
         self.assertEqual(re.findall(r'\sstyle="', self.html), [])
+
+
+class TestBlogIndex(unittest.TestCase):
+    def setUp(self):
+        self.html = read_output("blog.html")
+
+    def test_lists_every_post(self):
+        self.assertEqual(self.html.count('class="card card--post"'), 12)
+
+    def test_has_category_filter_chips(self):
+        self.assertEqual(self.html.count('class="chip"'), 4)
+
+    def test_chips_are_real_buttons(self):
+        chips = re.findall(r'<(\w+)[^>]*class="chip"', self.html)
+        self.assertTrue(all(tag == "button" for tag in chips), chips)
+
+    def test_chips_expose_pressed_state(self):
+        self.assertIn('aria-pressed="true"', self.html)
+
+    def test_no_inline_style(self):
+        self.assertEqual(re.findall(r'\sstyle="', self.html), [])
+
+
+class TestBlogPost(unittest.TestCase):
+    def setUp(self):
+        self.html = read_output("blog/quan-1.html")
+
+    def test_has_conversion_sidebar(self):
+        # Sửa lỗi C7.
+        self.assertIn('class="quote-aside"', self.html)
+        self.assertIn(SITE.business.phone_display, self.html)
+
+    def test_sidebar_links_to_a_related_service(self):
+        aside = self.html.split('class="quote-aside"')[1].split("</aside>")[0]
+        self.assertIn("/dich-vu.html#", aside)
+
+    def test_has_table_of_contents(self):
+        self.assertIn('class="toc"', self.html)
+
+    def test_headings_have_anchor_ids(self):
+        self.assertRegex(self.html, r'<h2 id="[a-z0-9-]+">')
+
+    def test_has_blogposting_schema(self):
+        self.assertIn("BlogPosting", self.html)
+
+    def test_no_inline_style(self):
+        # Bản cũ có style="max-width:760px" ngay trong PAGE_TMPL.
+        self.assertEqual(re.findall(r'\sstyle="', self.html), [])
+
+    def test_tables_are_wrapped_for_horizontal_scroll(self):
+        if "<table" in self.html:
+            self.assertIn("table-scroll", self.html)
+
+    def test_cover_image_has_dimensions(self):
+        cover = re.search(r'<img[^>]*class="[^"]*cover[^"]*"[^>]*>', self.html)
+        self.assertIsNotNone(cover)
+        self.assertIn("width=", cover.group(0))
+
+
+class TestAllPostsBuild(unittest.TestCase):
+    def test_every_post_file_exists(self):
+        ensure_built()
+        for post in SITE.posts:
+            with self.subTest(post=post.slug):
+                path = os.path.join(ROOT, "blog", f"{post.slug}.html")
+                self.assertTrue(os.path.exists(path))
+
+    def test_old_build_script_removed(self):
+        self.assertFalse(os.path.exists(os.path.join(ROOT, "scripts", "build_blog.py")))

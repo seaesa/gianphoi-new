@@ -302,6 +302,124 @@ def build_contact(site: SiteData) -> str:
     )
 
 
+def build_blog_index(site: SiteData) -> str:
+    crumbs = [("Trang chủ", "/"), ("Blog", "/blog.html")]
+    return render_page(
+        site,
+        template="blog.html",
+        out="blog.html",
+        page_id="blog",
+        title=f"Blog | {site.business.name}",
+        description=(
+            "Kinh nghiệm chọn mua giàn phơi thông minh, so sánh thương hiệu và hướng "
+            "dẫn lắp đặt theo từng khu vực tại TP.HCM và Bình Dương."
+        ),
+        path="/blog.html",
+        jsonld=schema.to_jsonld(
+            schema.local_business(site), schema.breadcrumb_list(crumbs)
+        ),
+        main_context={
+            "posts": "\n".join(components.post_card(p) for p in site.posts),
+        },
+    )
+
+
+# Ánh xạ bài viết sang dịch vụ liên quan cho sidebar chuyển đổi.
+POST_SERVICE_HINTS = (
+    ("vach-lanh", "vach-ngan-lanh"),
+    ("mua-mua", "bat-che-nang-mua"),
+    ("mui-hoi", "gian-phoi-dieu-khien"),
+    ("chung-cu", "gian-phoi-xep-tuong"),
+    ("giai-phap-khong-gian", "gian-phoi-xep-tuong"),
+)
+
+
+def _related_service(site: SiteData, slug: str):
+    for needle, service_slug in POST_SERVICE_HINTS:
+        if needle in slug:
+            return find_service(site, service_slug)
+    return next(s for s in site.services if s.popular)
+
+
+def _wrap_tables(html: str) -> str:
+    """Bảng trong bài viết phải cuộn ngang được, không làm vỡ trang ở mobile."""
+    return html.replace(
+        "<table>", '<div class="table-scroll"><table>'
+    ).replace("</table>", "</table></div>")
+
+
+def _render_toc(outline: list[tuple[int, str, str]]) -> str:
+    if len(outline) < 3:
+        return ""
+    items = "\n".join(
+        f'            <li data-level="{level}">'
+        f'<a href="#{anchor}">{text}</a></li>'
+        for level, text, anchor in outline
+    )
+    return (
+        '        <nav class="toc" aria-labelledby="toc-heading">\n'
+        '          <h2 id="toc-heading">Nội dung bài viết</h2>\n'
+        "          <ol>\n"
+        f"{items}\n"
+        "          </ol>\n"
+        "        </nav>"
+    )
+
+
+def build_posts(site: SiteData) -> list[str]:
+    from scripts.markdown import add_heading_anchors, md_to_html, strip_front_matter
+    from scripts.sitedata import format_price
+
+    written = []
+    for index, post in enumerate(site.posts):
+        with open(post.source, encoding="utf-8") as handle:
+            raw = handle.read()
+        body_html, outline = add_heading_anchors(
+            md_to_html(strip_front_matter(raw))
+        )
+        body_html = _wrap_tables(body_html)
+
+        related = _related_service(site, post.slug)
+        others = [p for i, p in enumerate(site.posts) if i != index][:3]
+        crumbs = [
+            ("Trang chủ", "/"),
+            ("Blog", "/blog.html"),
+            (post.title, f"/blog/{post.slug}.html"),
+        ]
+
+        written.append(
+            render_page(
+                site,
+                template="post.html",
+                out=os.path.join("blog", f"{post.slug}.html"),
+                page_id="blog",
+                title=f"{post.title} | Blog {site.business.name}",
+                description=post.desc,
+                path=f"/blog/{post.slug}.html",
+                jsonld=schema.to_jsonld(
+                    schema.blog_posting(site, post), schema.breadcrumb_list(crumbs)
+                ),
+                main_context={
+                    "post_title": post.title,
+                    "date": post.date,
+                    "iso_date": post.iso_date,
+                    "category": post.category,
+                    "img": post.img,
+                    "toc": _render_toc(outline),
+                    "body": body_html,
+                    "related_name": related.name,
+                    "related_price": format_price(related),
+                    "related_slug": related.slug,
+                    "related_specs": components.spec_line(related),
+                    "related_posts": "\n".join(
+                        components.post_card(p) for p in others
+                    ),
+                },
+            )
+        )
+    return written
+
+
 def build(root: str = ROOT) -> list[str]:
     site = load_site()
     return [
@@ -310,6 +428,8 @@ def build(root: str = ROOT) -> list[str]:
         build_areas(site),
         build_about(site),
         build_contact(site),
+        build_blog_index(site),
+        *build_posts(site),
     ]
 
 
