@@ -19,10 +19,10 @@
     <!-- lien-he.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/khu-vuc.html</loc>
+    <loc>https://gianphoithongminh.vn/du-an.html</loc>
     <lastmod>2026-09-11</lastmod>
-    <priority>0.7</priority>
-    <!-- khu-vuc.html -->
+    <priority>0.8</priority>
+    <!-- du-an.html -->
   </url>
   <url>
     <loc>https://gianphoithongminh.vn/gioi-thieu.html</loc>
@@ -37,75 +37,123 @@
     <!-- blog.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/quan-3.html</loc>
+    <loc>https://gianphoithongminh.vn/gian-phoi-dieu-khien.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <priority>0.85</priority>
+    <!-- gian-phoi-dieu-khien.html -->
+  </url>
+  <url>
+    <loc>https://gianphoithongminh.vn/gian-phoi-treo-tran.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <priority>0.85</priority>
+    <!-- gian-phoi-treo-tran.html -->
+  </url>
+  <url>
+    <loc>https://gianphoithongminh.vn/gian-phoi-xep-tuong.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <priority>0.85</priority>
+    <!-- gian-phoi-xep-tuong.html -->
+  </url>
+  <url>
+    <loc>https://gianphoithongminh.vn/luoi-cap-ban-cong.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <priority>0.85</priority>
+    <!-- luoi-cap-ban-cong.html -->
+  </url>
+  <url>
+    <loc>https://gianphoithongminh.vn/cua-luoi-chong-muoi.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <priority>0.85</priority>
+    <!-- cua-luoi-chong-muoi.html -->
+  </url>
+  <url>
+    <loc>https://gianphoithongminh.vn/vach-ngan-lanh.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <priority>0.85</priority>
+    <!-- vach-ngan-lanh.html -->
+  </url>
+  <url>
+    <loc>https://gianphoithongminh.vn/mai-hien-quay-tay.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <priority>0.85</priority>
+    <!-- mai-hien-quay-tay.html -->
+  </url>
+  <url>
+    <loc>https://gianphoithongminh.vn/bat-che-nang-mua.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <priority>0.85</priority>
+    <!-- bat-che-nang-mua.html -->
+  </url>
+  <url>
+    <loc>https://gianphoithongminh.vn/lap-dat-gian-phoi-thong-minh-chinh-hang-quan-3-tp-hcm-gia-re.html</loc>
     <lastmod>2026-05-29</lastmod>
     <priority>0.6</priority>
-    <!-- blog/quan-3.html -->
+    <!-- lap-dat-gian-phoi-thong-minh-chinh-hang-quan-3-tp-hcm-gia-re.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/di-an.html</loc>
+    <loc>https://gianphoithongminh.vn/lap-dat-gian-phoi-thong-minh-chinh-hang-tai-phuong-di-an-tphcm-binh-duong-cu.html</loc>
     <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
-    <!-- blog/di-an.html -->
+    <!-- lap-dat-gian-phoi-thong-minh-chinh-hang-tai-phuong-di-an-tphcm-binh-duong-cu.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/quan-1.html</loc>
+    <loc>https://gianphoithongminh.vn/lap-dat-gian-phoi-thong-minh-chinh-hang-quan-1-tphcm.html</loc>
     <lastmod>2026-05-27</lastmod>
     <priority>0.6</priority>
-    <!-- blog/quan-1.html -->
+    <!-- lap-dat-gian-phoi-thong-minh-chinh-hang-quan-1-tphcm.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/mui-hoi.html</loc>
+    <loc>https://gianphoithongminh.vn/cach-giai-quyet-quan-ao-phoi-trong-nha-co-mui-hoi.html</loc>
     <lastmod>2025-10-19</lastmod>
     <priority>0.6</priority>
-    <!-- blog/mui-hoi.html -->
+    <!-- cach-giai-quyet-quan-ao-phoi-trong-nha-co-mui-hoi.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/chung-cu.html</loc>
+    <loc>https://gianphoithongminh.vn/gian-phoi-thong-minh-cho-chung-cu-giai-phap-hien-dai-toi-uu-khong-gian-song-nam-2025.html</loc>
     <lastmod>2025-10-18</lastmod>
     <priority>0.6</priority>
-    <!-- blog/chung-cu.html -->
+    <!-- gian-phoi-thong-minh-cho-chung-cu-giai-phap-hien-dai-toi-uu-khong-gian-song-nam-2025.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/mua-mua.html</loc>
+    <loc>https://gianphoithongminh.vn/mua-mua-sai-gon-va-giai-phap-bat-che-nang-mua-cho-moi-nha.html</loc>
     <lastmod>2025-10-18</lastmod>
     <priority>0.6</priority>
-    <!-- blog/mua-mua.html -->
+    <!-- mua-mua-sai-gon-va-giai-phap-bat-che-nang-mua-cho-moi-nha.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/top5-thuong-hieu.html</loc>
+    <loc>https://gianphoithongminh.vn/top-5-thuong-hieu-gian-phoi-thong-minh-uy-tin-nhat-viet-nam.html</loc>
     <lastmod>2025-10-17</lastmod>
     <priority>0.6</priority>
-    <!-- blog/top5-thuong-hieu.html -->
+    <!-- top-5-thuong-hieu-gian-phoi-thong-minh-uy-tin-nhat-viet-nam.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/top5-mau.html</loc>
+    <loc>https://gianphoithongminh.vn/top-5-mau-gian-phoi-thong-minh-moi-nhat-nam-2025-tien-nghi-hien-dai-va-tiet-kiem-khong-gian.html</loc>
     <lastmod>2025-10-17</lastmod>
     <priority>0.6</priority>
-    <!-- blog/top5-mau.html -->
+    <!-- top-5-mau-gian-phoi-thong-minh-moi-nhat-nam-2025-tien-nghi-hien-dai-va-tiet-kiem-khong-gian.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/vach-lanh.html</loc>
+    <loc>https://gianphoithongminh.vn/dich-vu-lap-dat-vach-lanh-ngan-dieu-hoa-tai-binh-duong.html</loc>
     <lastmod>2025-10-16</lastmod>
     <priority>0.6</priority>
-    <!-- blog/vach-lanh.html -->
+    <!-- dich-vu-lap-dat-vach-lanh-ngan-dieu-hoa-tai-binh-duong.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/giai-phap-khong-gian.html</loc>
+    <loc>https://gianphoithongminh.vn/giai-phap-gian-phoi-thong-minh-phu-hop-cho-tung-khong-gian.html</loc>
     <lastmod>2025-10-16</lastmod>
     <priority>0.6</priority>
-    <!-- blog/giai-phap-khong-gian.html -->
+    <!-- giai-phap-gian-phoi-thong-minh-phu-hop-cho-tung-khong-gian.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/top10-don-vi.html</loc>
+    <loc>https://gianphoithongminh.vn/top-10-don-vi-lap-dat-gian-phoi-thong-minh-uy-tin-o-binh-duong-tphcm.html</loc>
     <lastmod>2025-10-16</lastmod>
     <priority>0.6</priority>
-    <!-- blog/top10-don-vi.html -->
+    <!-- top-10-don-vi-lap-dat-gian-phoi-thong-minh-uy-tin-o-binh-duong-tphcm.html -->
   </url>
   <url>
-    <loc>https://gianphoithongminh.vn/blog/nhan-biet-chinh-hang.html</loc>
+    <loc>https://gianphoithongminh.vn/cach-nhan-biet-gian-phoi-thong-minh-chinh-hang.html</loc>
     <lastmod>2025-10-15</lastmod>
     <priority>0.6</priority>
-    <!-- blog/nhan-biet-chinh-hang.html -->
+    <!-- cach-nhan-biet-gian-phoi-thong-minh-chinh-hang.html -->
   </url>
 </urlset>

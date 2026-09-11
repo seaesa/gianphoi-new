@@ -13,12 +13,20 @@ Thiết kế **"Thép & Nắng"** — xem
 python -m scripts.build
 ```
 
-Sinh toàn bộ HTML tĩnh ở thư mục gốc: 6 trang chính, 12 bài blog,
-`sitemap.xml` và `robots.txt`. Không cần Node, không cần cài gì ngoài
-Python 3 và Pillow (chỉ dùng khi xử lý ảnh).
+Sinh toàn bộ HTML tĩnh ở thư mục gốc: 6 trang chính, **8 trang dịch vụ
+riêng**, 12 bài blog, `sitemap.xml` và `robots.txt`. Không cần Node, không
+cần cài gì ngoài Python 3 và Pillow (chỉ dùng khi xử lý ảnh).
 
-**Không sửa tay các file `.html` ở thư mục gốc và trong `blog/`** — chúng là
-output, sẽ bị ghi đè ở lần build sau. Sửa trong `templates/` hoặc `site.json`.
+## URL
+
+| Loại | Đường dẫn | Ghi chú |
+|---|---|---|
+| Trang chính | `/index.html`, `/dich-vu.html`, `/du-an.html`, `/gioi-thieu.html`, `/lien-he.html`, `/blog.html` | |
+| Trang dịch vụ | `/<slug-dịch-vụ>.html` | Sinh từ `services[].slug`, có dropdown trong nav |
+| Bài blog | `/<slug-dài>.html` ở thư mục gốc | **Giữ nguyên URL của site đang chạy** (`posts[].url_slug`) để không mất thứ hạng tìm kiếm — đừng đổi |
+
+**Không sửa tay file `.html` nào ở thư mục gốc** — tất cả đều là output,
+sẽ bị ghi đè ở lần build sau. Sửa trong `templates/` hoặc `site.json`.
 
 ## Chạy thử
 
@@ -33,7 +41,7 @@ python -m unittest discover -s tests -t . -v
 ```
 
 Dùng `unittest` của thư viện chuẩn, **không cần pytest**.
-`tests/test_acceptance.py` chuyển 11 tiêu chí nghiệm thu ở spec §7 thành
+`tests/test_acceptance.py` chuyển các tiêu chí nghiệm thu ở spec §7 thành
 assertion chạy trên HTML đã build.
 
 ## Cấu trúc
@@ -41,11 +49,17 @@ assertion chạy trên HTML đã build.
 | Đường dẫn | Vai trò |
 |---|---|
 | `site.json` | **Nguồn chân lý duy nhất**: thông tin doanh nghiệp, 8 dịch vụ kèm thông số và giá, 10 FAQ, khu vực phục vụ, 12 bài blog |
-| `templates/` | Template từng trang; file bắt đầu bằng `_` là partial dùng chung |
+| `templates/` | Template từng trang; file bắt đầu bằng `_` là partial dùng chung. `service.html` dùng chung cho cả 8 trang dịch vụ |
 | `scripts/` | Build pipeline (`build.py`) và các module: dữ liệu, markdown, template engine, component, JSON-LD, ảnh, tương phản màu |
 | `assets/css/main.css` | Toàn bộ CSS, tổ chức bằng `@layer tokens, base, layout, components, utilities` |
 | `assets/svg/` | 8 hình vẽ nét sản phẩm — hiện **không hiển thị ở đâu**, giữ làm phương án dự phòng cho dịch vụ chưa có ảnh |
 | `assets/images/_src/site/` | Ảnh gốc, **không deploy** (đã chặn trong `robots.txt`) |
+| `assets/images/logo-hoa-phat.png` | Logo Hòa Phát dùng ở header và footer |
+| `docs/research/blog-raw/` | Nội dung thô của bài blog |
+
+Sửa giá, thêm dịch vụ, đổi số điện thoại → sửa `site.json` rồi build lại.
+Một dữ liệu chỉ tồn tại một chỗ: trang chủ, trang dịch vụ riêng, dropdown
+nav, form báo giá và JSON-LD đều đọc từ đó.
 
 ## Ảnh
 
@@ -54,6 +68,7 @@ assertion chạy trên HTML đã build.
 
 ```bash
 # 1. bỏ ảnh gốc vào _src/site/{services,projects,usecases,blog}/ hoặc _src/site/
+#    (projects/ = ảnh công trình hiện trên /du-an.html)
 # 2. sinh lại bản tối ưu
 python -m scripts.optimize_images
 # 3. khai báo trong site.json (photo / img / projects) rồi build lại
@@ -65,11 +80,6 @@ vượt 200KB sẽ tự hạ chất lượng cho tới khi lọt ngưỡng.
 
 **Quy tắc alt:** mô tả đúng thứ có trong ảnh, không mô tả thứ mong muốn có.
 Thumbnail blog để `alt=""` vì tiêu đề đã nằm trong cùng thẻ `<a>`.
-| `docs/research/blog-raw/` | Nội dung thô của bài blog |
-
-Sửa giá, thêm dịch vụ, đổi số điện thoại → sửa `site.json` rồi build lại.
-Một dữ liệu chỉ tồn tại một chỗ: trang chủ, trang dịch vụ, dropdown form và
-JSON-LD đều đọc từ đó.
 
 ## Những việc còn lại
 

@@ -68,7 +68,8 @@
         }
       ],
       "photo": "gian-phoi-dieu-khien",
-      "photo_alt": "Giàn phơi thông minh Hòa Phát nâng hạ bằng cơ cấu xếp, lắp trên trần"
+      "photo_alt": "Giàn phơi thông minh Hòa Phát nâng hạ bằng cơ cấu xếp, lắp trên trần",
+      "intro": "Giàn phơi nâng hạ bằng remote, không phải quay tay. Phù hợp với ban công căn hộ và nhà phố có trần cao, nơi bạn muốn thao tác nhanh mà vẫn giữ được thẩm mỹ cho không gian."
     },
     {
       "slug": "gian-phoi-treo-tran",
@@ -95,7 +96,8 @@
         }
       ],
       "photo": "gian-phoi-treo-tran",
-      "photo_alt": "Giàn phơi treo trần bốn thanh inox lắp dưới trần nhà"
+      "photo_alt": "Giàn phơi treo trần bốn thanh inox lắp dưới trần nhà",
+      "intro": "Mẫu Hòa Phát chính hãng, khung inox 304, hai thanh phơi chịu tải tới 70 kg — đủ cho khối lượng giặt của cả gia đình. Nâng hạ bằng tay quay gắn tường, có nhiều màu để chọn theo nội thất."
     },
     {
       "slug": "gian-phoi-xep-tuong",
@@ -122,7 +124,8 @@
         }
       ],
       "photo": "gian-phoi-xep-tuong",
-      "photo_alt": "Giàn phơi xếp gắn tường với các cánh tay inox gập gọn"
+      "photo_alt": "Giàn phơi xếp gắn tường với các cánh tay inox gập gọn",
+      "intro": "Khung inox 304 gấp gọn sát tường khi không dùng, trả lại lối đi cho ban công hẹp. Đây là lựa chọn phổ biến nhất cho căn hộ chung cư diện tích nhỏ."
     },
     {
       "slug": "luoi-cap-ban-cong",
@@ -149,7 +152,8 @@
         }
       ],
       "photo": "luoi-cap-ban-cong",
-      "photo_alt": "Lưới cáp inox căng kín lan can ban công nhìn ra thành phố"
+      "photo_alt": "Lưới cáp inox căng kín lan can ban công nhìn ra thành phố",
+      "intro": "Hệ cáp inox căng kín lan can, giữ thoáng gió và tầm nhìn nhưng vẫn chặn được nguy cơ trẻ nhỏ hoặc vật nuôi lọt ra ngoài. Tính theo mét vuông mặt lan can."
     },
     {
       "slug": "cua-luoi-chong-muoi",
@@ -176,7 +180,8 @@
         }
       ],
       "photo": "cua-luoi-chong-muoi",
-      "photo_alt": "Cửa lưới chống muỗi cố định lắp cho cửa kính lùa"
+      "photo_alt": "Cửa lưới chống muỗi cố định lắp cho cửa kính lùa",
+      "intro": "Khung nhôm cao cấp với lưới sợi thủy tinh chống cháy, đóng mở nhẹ nhàng. Lắp được cho cửa chính, cửa sổ và cửa ra ban công."
     },
     {
       "slug": "vach-ngan-lanh",
@@ -203,7 +208,8 @@
         }
       ],
       "photo": "vach-ngan-lanh",
-      "photo_alt": "Vách ngăn lạnh điều hoà lắp trong khung cửa gỗ"
+      "photo_alt": "Vách ngăn lạnh điều hoà lắp trong khung cửa gỗ",
+      "intro": "Giữ hơi lạnh trong khu vực cần làm mát, giảm hao điện điều hoà, đồng thời chắn bụi và côn trùng. Thường dùng cho văn phòng, cửa hàng và nhà xưởng."
     },
     {
       "slug": "mai-hien-quay-tay",
@@ -230,7 +236,8 @@
         }
       ],
       "photo": "mai-hien-quay-tay",
-      "photo_alt": "Mái hiên vải bạt màu xanh vươn ra trước mặt tiền cửa hàng"
+      "photo_alt": "Mái hiên vải bạt màu xanh vươn ra trước mặt tiền cửa hàng",
+      "intro": "Khung sắt sơn tĩnh điện, vải bạt chống tia UV, thu mở bằng tay quay. Phù hợp mặt tiền nhà phố, quán cà phê và cửa hàng cần che nắng theo giờ."
     },
     {
       "slug": "bat-che-nang-mua",
@@ -257,7 +264,8 @@
         }
       ],
       "photo": "bat-che-nang-mua",
-      "photo_alt": "Bạt che nắng mưa tự cuốn lắp bên ngoài mặt kính toà nhà"
+      "photo_alt": "Bạt che nắng mưa tự cuốn lắp bên ngoài mặt kính toà nhà",
+      "intro": "Hệ bạt cuốn tự động che nắng và chắn mưa cho ban công, sân thượng. Thu gọn khi không dùng nên không cản tầm nhìn."
     }
   ],
   "faqs": [
@@ -322,7 +330,8 @@
       "desc": "Hướng dẫn lắp đặt giàn phơi thông minh chính hãng giá rẻ tại Quận 3 TP.HCM, quy trình 4 bước và bảng giá tham khảo.",
       "category": "Khu vực",
       "source": "docs/research/blog-raw/quan-3.txt",
-      "img_alt": "Giàn phơi gắn tường trong phòng trống"
+      "img_alt": "Giàn phơi gắn tường trong phòng trống",
+      "url_slug": "lap-dat-gian-phoi-thong-minh-chinh-hang-quan-3-tp-hcm-gia-re"
     },
     {
       "slug": "di-an",
@@ -333,7 +342,8 @@
       "desc": "Dịch vụ lắp đặt giàn phơi thông minh, lưới cáp ban công và cửa lưới chống muỗi chính hãng tại Dĩ An, TP.HCM.",
       "category": "Khu vực",
       "source": "docs/research/blog-raw/di-an.txt",
-      "img_alt": "Giàn phơi thông minh treo áo, lắp dưới trần"
+      "img_alt": "Giàn phơi thông minh treo áo, lắp dưới trần",
+      "url_slug": "lap-dat-gian-phoi-thong-minh-chinh-hang-tai-phuong-di-an-tphcm-binh-duong-cu"
     },
     {
       "slug": "quan-1",
@@ -344,7 +354,8 @@
       "desc": "Tiêu chí chọn đơn vị lắp đặt giàn phơi thông minh uy tín tại Quận 1, quy trình thi công và bảng giá tham khảo.",
       "category": "Khu vực",
       "source": "docs/research/blog-raw/quan-1.txt",
-      "img_alt": "Giàn phơi treo trần lắp trong phòng"
+      "img_alt": "Giàn phơi treo trần lắp trong phòng",
+      "url_slug": "lap-dat-gian-phoi-thong-minh-chinh-hang-quan-1-tphcm"
     },
     {
       "slug": "mui-hoi",
@@ -355,7 +366,8 @@
       "desc": "10 cách khử mùi hôi quần áo phơi trong nhà hiệu quả, cùng gợi ý các dòng giàn phơi thông minh phù hợp cho chung cư.",
       "category": "Kiến thức",
       "source": "docs/research/blog-raw/mui-hoi.txt",
-      "img_alt": "Quần áo treo trên thanh phơi trong nhà"
+      "img_alt": "Quần áo treo trên thanh phơi trong nhà",
+      "url_slug": "cach-giai-quyet-quan-ao-phoi-trong-nha-co-mui-hoi"
     },
     {
       "slug": "chung-cu",
@@ -366,7 +378,8 @@
       "desc": "Phân loại, tiêu chí chọn mua và bảng giá tham khảo giàn phơi thông minh cho căn hộ chung cư năm 2025.",
       "category": "Kiến thức",
       "source": "docs/research/blog-raw/chung-cu.txt",
-      "img_alt": "Giàn phơi xếp gắn tường bên ngoài căn hộ"
+      "img_alt": "Giàn phơi xếp gắn tường bên ngoài căn hộ",
+      "url_slug": "gian-phoi-thong-minh-cho-chung-cu-giai-phap-hien-dai-toi-uu-khong-gian-song-nam-2025"
     },
     {
       "slug": "mua-mua",
@@ -377,7 +390,8 @@
       "desc": "Các loại bạt che nắng mưa phổ biến và mẹo chọn bạt che phù hợp cho mùa mưa tại TP.HCM.",
       "category": "Kiến thức",
       "source": "docs/research/blog-raw/mua-mua.txt",
-      "img_alt": "Người đứng trong nhà đưa tay ra hứng mưa"
+      "img_alt": "Người đứng trong nhà đưa tay ra hứng mưa",
+      "url_slug": "mua-mua-sai-gon-va-giai-phap-bat-che-nang-mua-cho-moi-nha"
     },
     {
       "slug": "top5-thuong-hieu",
@@ -388,7 +402,8 @@
       "desc": "Đánh giá 5 thương hiệu giàn phơi thông minh uy tín: Sankaku, Hoseta, Hòa Phát, Việt Nhật, Larano.",
       "category": "So sánh",
       "source": "docs/research/blog-raw/top5-thuong-hieu.txt",
-      "img_alt": "Giàn phơi gắn tường với dãy móc áo màu xanh"
+      "img_alt": "Giàn phơi gắn tường với dãy móc áo màu xanh",
+      "url_slug": "top-5-thuong-hieu-gian-phoi-thong-minh-uy-tin-nhat-viet-nam"
     },
     {
       "slug": "top5-mau",
@@ -399,7 +414,8 @@
       "desc": "Điểm qua 5 mẫu giàn phơi thông minh đáng mua nhất năm 2025 kèm giá tham khảo.",
       "category": "So sánh",
       "source": "docs/research/blog-raw/top5-mau.txt",
-      "img_alt": "Giàn phơi điều khiển lắp trên ban công, chụp buổi tối"
+      "img_alt": "Giàn phơi điều khiển lắp trên ban công, chụp buổi tối",
+      "url_slug": "top-5-mau-gian-phoi-thong-minh-moi-nhat-nam-2025-tien-nghi-hien-dai-va-tiet-kiem-khong-gian"
     },
     {
       "slug": "vach-lanh",
@@ -410,7 +426,8 @@
       "desc": "Lợi ích, ứng dụng thực tế, quy trình và báo giá lắp đặt vách lạnh ngăn điều hòa tại Bình Dương.",
       "category": "Khu vực",
       "source": "docs/research/blog-raw/vach-lanh.txt",
-      "img_alt": "Vách ngăn lạnh lắp cạnh khu vực cầu thang"
+      "img_alt": "Vách ngăn lạnh lắp cạnh khu vực cầu thang",
+      "url_slug": "dich-vu-lap-dat-vach-lanh-ngan-dieu-hoa-tai-binh-duong"
     },
     {
       "slug": "giai-phap-khong-gian",
@@ -421,7 +438,8 @@
       "desc": "Giải pháp giàn phơi thông minh theo từng loại không gian: chung cư, nhà phố, biệt thự, ban công nhỏ.",
       "category": "Kiến thức",
       "source": "docs/research/blog-raw/giai-phap-khong-gian.txt",
-      "img_alt": "Sân thượng có vườn và khu vực phơi ngoài trời"
+      "img_alt": "Sân thượng có vườn và khu vực phơi ngoài trời",
+      "url_slug": "giai-phap-gian-phoi-thong-minh-phu-hop-cho-tung-khong-gian"
     },
     {
       "slug": "top10-don-vi",
@@ -432,7 +450,8 @@
       "desc": "Danh sách 10 đơn vị lắp đặt giàn phơi thông minh được khách hàng tin tưởng tại Bình Dương & TP.HCM.",
       "category": "So sánh",
       "source": "docs/research/blog-raw/top10-don-vi.txt",
-      "img_alt": "Giàn phơi thông minh lắp trong không gian bếp căn hộ"
+      "img_alt": "Giàn phơi thông minh lắp trong không gian bếp căn hộ",
+      "url_slug": "top-10-don-vi-lap-dat-gian-phoi-thong-minh-uy-tin-o-binh-duong-tphcm"
     },
     {
       "slug": "nhan-biet-chinh-hang",
@@ -443,45 +462,38 @@
       "desc": "Hướng dẫn nhận biết giàn phơi thông minh chính hãng qua bao bì, chất liệu, logo, hóa đơn bảo hành.",
       "category": "So sánh",
       "source": "docs/research/blog-raw/nhan-biet-chinh-hang.txt",
-      "img_alt": "Giàn phơi treo trần với dãy móc áo đen, nhìn từ dưới lên"
+      "img_alt": "Giàn phơi treo trần với dãy móc áo đen, nhìn từ dưới lên",
+      "url_slug": "cach-nhan-biet-gian-phoi-thong-minh-chinh-hang"
     }
   ],
   "projects": [
     {
-      "img": "thu-dau-mot",
+      "img": "cua-luoi-xep",
       "location": "Thủ Dầu Một",
-      "work": "Thi công lắp đặt giàn phơi gắn tường",
-      "alt": "Kỹ thuật viên đang lắp giàn phơi gắn tường tại công trình ở Thủ Dầu Một"
+      "work": "Cửa lưới tự cuốn",
+      "duration": "1 ngày",
+      "alt": "Cửa lưới chống muỗi dạng xếp lắp cho cửa chính ra ban công tại Thủ Dầu Một"
+    },
+    {
+      "img": "gan-tuong",
+      "location": "Thủ Đức",
+      "work": "Giàn phơi thông minh gắn tường",
+      "duration": "2 ngày",
+      "alt": "Giàn phơi thông minh gắn tường lắp ngoài ban công căn hộ tại Thủ Đức"
     },
     {
       "img": "quan-7",
       "location": "Quận 7",
       "work": "Giàn phơi điều khiển từ xa",
+      "duration": "1 ngày",
       "alt": "Giàn phơi điều khiển từ xa lắp trên ban công, chụp buổi tối tại Quận 7"
     },
     {
       "img": "quan-1",
       "location": "Quận 1",
-      "work": "Vách lạnh ngăn điều hoà tổ ong",
+      "work": "Vách lạnh ngăn điều hoà",
+      "duration": "2 ngày",
       "alt": "Vách lạnh tổ ong ngăn điều hoà lắp cạnh cầu thang tại Quận 1"
-    },
-    {
-      "img": "binh-duong",
-      "location": "Bình Dương",
-      "work": "Thi công nhiều bộ giàn phơi",
-      "alt": "Thợ thi công lắp nhiều bộ giàn phơi trong một công trình tại Bình Dương"
-    },
-    {
-      "img": "cua-luoi-xep",
-      "location": "Bình Dương",
-      "work": "Cửa lưới chống muỗi dạng xếp",
-      "alt": "Cửa lưới chống muỗi dạng xếp lắp cho cửa chính ra ban công"
-    },
-    {
-      "img": "gan-tuong",
-      "location": "TP.HCM",
-      "work": "Giàn phơi thông minh gắn tường",
-      "alt": "Giàn phơi thông minh gắn tường lắp ngoài ban công căn hộ"
     }
   ]
 }

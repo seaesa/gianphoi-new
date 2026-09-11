@@ -93,13 +93,18 @@ def service_card(service: Service, *, svg_inline: str | None = None) -> str:
         f'      <div class="card__figure card__figure--photo">{figure}</div>\n'
         f'      <div class="card__body">\n'
         f"{badge}"
-        f"        <h3>{escape(service.name)}</h3>\n"
+        f'        <h3><a class="card__title-link" href="{escape(service.url)}">'
+        f"{escape(service.name)}</a></h3>\n"
         f'        <p class="card__price">{escape(format_price(service))}</p>\n'
         f'        <p class="card__blurb">{escape(service.blurb)}</p>\n'
         f"{spec_line(service)}\n"
-        f'        <a class="btn btn--primary" '
+        f'        <div class="card__actions">\n'
+        f'          <a class="btn btn--primary" '
         f'href="/lien-he.html?dich-vu={escape(service.slug)}">'
         f"Nhận báo giá</a>\n"
+        f'          <a class="btn btn--ghost" href="{escape(service.url)}">'
+        f"Chi tiết</a>\n"
+        f"        </div>\n"
         f"      </div>\n"
         f"    </article>"
     )
@@ -116,7 +121,7 @@ def post_card(post: Post) -> str:
         post.img, "", folder="blog", sizes=CARD_SIZES, decorative=True
     )
     return (
-        f'    <a class="card card--post" href="/blog/{escape(post.slug)}.html" '
+        f'    <a class="card card--post" href="{escape(post.url)}" '
         f'data-category="{escape(post.category)}">\n'
         f'      <div class="card__thumb">{thumb}</div>\n'
         f'      <div class="card__body">\n'
@@ -248,18 +253,50 @@ NAV_ITEMS = (
     ("home", "Trang chủ", "/index.html"),
     ("about", "Giới thiệu", "/gioi-thieu.html"),
     ("services", "Dịch vụ", "/dich-vu.html"),
-    ("areas", "Khu vực", "/khu-vuc.html"),
+    ("projects", "Dự án", "/du-an.html"),
     ("blog", "Blog", "/blog.html"),
     ("contact", "Liên hệ", "/lien-he.html"),
 )
 
 
-def nav_list(current: str) -> str:
+def _services_dropdown(site: SiteData, current: str) -> str:
+    """Menu con liệt kê từng dịch vụ. Dùng <button> chứ không phải <a> vì nó
+    mở panel chứ không điều hướng — trình đọc màn hình cần biết điều đó."""
+    links = [
+        '            <li><a class="nav__sublink" href="/dich-vu.html">'
+        "Tất cả dịch vụ &amp; bảng giá</a></li>"
+    ]
+    links += [
+        f'            <li><a class="nav__sublink" href="{service.url}">'
+        f"{escape(service.name)}</a></li>"
+        for service in site.services
+    ]
+    body = "\n".join(links)
+    marker = ' aria-current="page"' if current == "services" else ""
+    return (
+        '        <li class="nav__item nav__item--has-menu">\n'
+        f'          <a class="nav__link" href="/dich-vu.html"{marker}>Dịch vụ</a>\n'
+        '          <button class="nav__toggle" type="button" '
+        'aria-expanded="false" aria-controls="nav-services" '
+        'aria-label="Mở danh sách dịch vụ">\n'
+        '            <span class="nav__chevron" aria-hidden="true"></span>\n'
+        "          </button>\n"
+        f'          <ul class="nav__menu" id="nav-services">\n{body}\n'
+        "          </ul>\n"
+        "        </li>"
+    )
+
+
+def nav_list(site: SiteData, current: str) -> str:
     items = []
     for page_id, label, href in NAV_ITEMS:
+        if page_id == "services":
+            items.append(_services_dropdown(site, current))
+            continue
         marker = ' aria-current="page"' if page_id == current else ""
         items.append(
-            f'        <li><a class="nav__link" href="{href}"{marker}>'
+            f'        <li class="nav__item">'
+            f'<a class="nav__link" href="{href}"{marker}>'
             f"{escape(label)}</a></li>"
         )
     body = "\n".join(items)
@@ -321,7 +358,9 @@ def project_card(project) -> str:
         + "\n"
         f'        <figcaption class="card__body">\n'
         f'          <span class="badge">{escape(project.location)}</span>\n'
-        f"          <p>{escape(project.work)}</p>\n"
+        f"          <h3>{escape(project.work)}</h3>\n"
+        f'          <p class="muted">Thời gian thi công: '
+        f"{escape(project.duration)}</p>\n"
         f"        </figcaption>\n"
         f"      </figure>"
     )
@@ -333,3 +372,21 @@ def project_grid(projects) -> str:
                 'data-empty="Chưa có ảnh công trình thật để đăng."></div>')
     body = "\n".join(project_card(p) for p in projects)
     return f'    <div class="project-grid">\n{body}\n    </div>'
+
+
+def related_services(site: SiteData, service: Service) -> str:
+    """Các dịch vụ khác cùng nhóm, để khách so sánh ngay trên trang chi tiết."""
+    from scripts.sitedata import service_groups
+
+    others = [
+        s
+        for group, items in service_groups(site)
+        if group == service.group
+        for s in items
+        if s.slug != service.slug
+    ]
+    if not others:
+        others = [s for s in site.services if s.slug != service.slug][:3]
+    return "\n".join(
+        service_card(s, svg_inline=None) for s in others[:3]
+    )

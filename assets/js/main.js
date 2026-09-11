@@ -42,6 +42,42 @@ function initNav() {
   });
 }
 
+/* -------------------------------------------------- 1b. Dropdown dịch vụ */
+
+function initServicesMenu() {
+  const toggle = document.querySelector(".nav__toggle");
+  if (!toggle) return;
+
+  const menuId = toggle.getAttribute("aria-controls");
+  const menu = menuId ? document.getElementById(menuId) : null;
+  if (!menu) return;
+
+  const setOpen = (open) => {
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute(
+      "aria-label",
+      open ? "Đóng danh sách dịch vụ" : "Mở danh sách dịch vụ"
+    );
+  };
+
+  toggle.addEventListener("click", () => {
+    setOpen(toggle.getAttribute("aria-expanded") !== "true");
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    if (toggle.getAttribute("aria-expanded") !== "true") return;
+    setOpen(false);
+    toggle.focus();
+  });
+
+  document.addEventListener("click", (event) => {
+    if (toggle.getAttribute("aria-expanded") !== "true") return;
+    if (toggle.contains(event.target) || menu.contains(event.target)) return;
+    setOpen(false);
+  });
+}
+
 /* -------------------------------------------------- 2. FAQ accordion */
 
 function initFaq() {
@@ -205,6 +241,7 @@ function initQuoteForm() {
 
 document.addEventListener("DOMContentLoaded", () => {
   initNav();
+  initServicesMenu();
   initFaq();
   initStickyBar();
   initChips();

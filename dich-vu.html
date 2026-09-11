@@ -408,18 +408,34 @@
 <header class="site-header">
   <div class="container header__inner">
     <a class="brand" href="/index.html">
-      <img src="/assets/images/logo.png" alt="Giàn Phơi Thông Minh Bình Dương &amp; TP.HCM" width="36" height="36">
+      <img src="/assets/images/logo-hoa-phat.png" alt="Giàn Phơi Thông Minh Bình Dương &amp; TP.HCM — lắp đặt giàn phơi Hòa Phát chính hãng" width="40" height="40">
       <span>Giàn Phơi Thông Minh<small>Bình Dương &amp; TP.HCM</small></span>
     </a>
 
     <nav class="nav" aria-label="Điều hướng chính">
       <ul class="nav__list" id="nav-list">
-        <li><a class="nav__link" href="/index.html">Trang chủ</a></li>
-        <li><a class="nav__link" href="/gioi-thieu.html">Giới thiệu</a></li>
-        <li><a class="nav__link" href="/dich-vu.html" aria-current="page">Dịch vụ</a></li>
-        <li><a class="nav__link" href="/khu-vuc.html">Khu vực</a></li>
-        <li><a class="nav__link" href="/blog.html">Blog</a></li>
-        <li><a class="nav__link" href="/lien-he.html">Liên hệ</a></li>
+        <li class="nav__item"><a class="nav__link" href="/index.html">Trang chủ</a></li>
+        <li class="nav__item"><a class="nav__link" href="/gioi-thieu.html">Giới thiệu</a></li>
+        <li class="nav__item nav__item--has-menu">
+          <a class="nav__link" href="/dich-vu.html" aria-current="page">Dịch vụ</a>
+          <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-services" aria-label="Mở danh sách dịch vụ">
+            <span class="nav__chevron" aria-hidden="true"></span>
+          </button>
+          <ul class="nav__menu" id="nav-services">
+            <li><a class="nav__sublink" href="/dich-vu.html">Tất cả dịch vụ &amp; bảng giá</a></li>
+            <li><a class="nav__sublink" href="/gian-phoi-dieu-khien.html">Giàn Phơi Thông Minh Điều Khiển</a></li>
+            <li><a class="nav__sublink" href="/gian-phoi-treo-tran.html">Giàn Phơi Treo Trần Quay Tay</a></li>
+            <li><a class="nav__sublink" href="/gian-phoi-xep-tuong.html">Giàn Phơi Xếp Gắn Tường</a></li>
+            <li><a class="nav__sublink" href="/luoi-cap-ban-cong.html">Lưới Cáp Ban Công Inox</a></li>
+            <li><a class="nav__sublink" href="/cua-luoi-chong-muoi.html">Cửa Lưới Chống Muỗi</a></li>
+            <li><a class="nav__sublink" href="/vach-ngan-lanh.html">Vách Ngăn Lạnh Điều Hoà</a></li>
+            <li><a class="nav__sublink" href="/mai-hien-quay-tay.html">Mái Hiên Quay Tay</a></li>
+            <li><a class="nav__sublink" href="/bat-che-nang-mua.html">Bạt Che Nắng Mưa Tự Cuốn</a></li>
+          </ul>
+        </li>
+        <li class="nav__item"><a class="nav__link" href="/du-an.html">Dự án</a></li>
+        <li class="nav__item"><a class="nav__link" href="/blog.html">Blog</a></li>
+        <li class="nav__item"><a class="nav__link" href="/lien-he.html">Liên hệ</a></li>
       </ul>
     </nav>
 
@@ -470,7 +486,7 @@
     <article class="card card--service" id="gian-phoi-dieu-khien">
       <div class="card__figure card__figure--photo"><img src="/assets/images/services/gian-phoi-dieu-khien-480.webp" alt="Giàn phơi thông minh Hòa Phát nâng hạ bằng cơ cấu xếp, lắp trên trần" width="480" height="336" srcset="/assets/images/services/gian-phoi-dieu-khien-480.webp 480w, /assets/images/services/gian-phoi-dieu-khien-600.webp 600w" sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw" loading="lazy" decoding="async"></div>
       <div class="card__body">
-        <h3>Giàn Phơi Thông Minh Điều Khiển</h3>
+        <h3><a class="card__title-link" href="/gian-phoi-dieu-khien.html">Giàn Phơi Thông Minh Điều Khiển</a></h3>
         <p class="card__price">3.200.000 – 4.500.000đ/bộ</p>
         <p class="card__blurb">Điều khiển bằng remote, sang trọng, tiết kiệm diện tích.</p>
       <dl class="spec-line">
@@ -478,14 +494,17 @@
         <div class="spec-line__row"><dt>Ưu điểm</dt><dd>Tiết kiệm diện tích</dd></div>
         <div class="spec-line__row"><dt>Bảo hành</dt><dd>5 năm</dd></div>
       </dl>
-        <a class="btn btn--primary" href="/lien-he.html?dich-vu=gian-phoi-dieu-khien">Nhận báo giá</a>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/lien-he.html?dich-vu=gian-phoi-dieu-khien">Nhận báo giá</a>
+          <a class="btn btn--ghost" href="/gian-phoi-dieu-khien.html">Chi tiết</a>
+        </div>
       </div>
     </article>
     <article class="card card--service" id="gian-phoi-treo-tran">
       <div class="card__figure card__figure--photo"><img src="/assets/images/services/gian-phoi-treo-tran-480.webp" alt="Giàn phơi treo trần bốn thanh inox lắp dưới trần nhà" width="480" height="417" srcset="/assets/images/services/gian-phoi-treo-tran-480.webp 480w, /assets/images/services/gian-phoi-treo-tran-800.webp 800w" sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw" loading="lazy" decoding="async"></div>
       <div class="card__body">
         <span class="badge badge--popular">Phổ biến nhất</span>
-        <h3>Giàn Phơi Treo Trần Quay Tay</h3>
+        <h3><a class="card__title-link" href="/gian-phoi-treo-tran.html">Giàn Phơi Treo Trần Quay Tay</a></h3>
         <p class="card__price">2.000.000 – 3.500.000đ/bộ</p>
         <p class="card__blurb">Hòa Phát chính hãng, inox 304, nhiều màu lựa chọn.</p>
       <dl class="spec-line">
@@ -493,13 +512,16 @@
         <div class="spec-line__row"><dt>Tải trọng</dt><dd>Tới 70 kg</dd></div>
         <div class="spec-line__row"><dt>Bảo hành</dt><dd>Liên hệ</dd></div>
       </dl>
-        <a class="btn btn--primary" href="/lien-he.html?dich-vu=gian-phoi-treo-tran">Nhận báo giá</a>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/lien-he.html?dich-vu=gian-phoi-treo-tran">Nhận báo giá</a>
+          <a class="btn btn--ghost" href="/gian-phoi-treo-tran.html">Chi tiết</a>
+        </div>
       </div>
     </article>
     <article class="card card--service" id="gian-phoi-xep-tuong">
       <div class="card__figure card__figure--photo"><img src="/assets/images/services/gian-phoi-xep-tuong-480.webp" alt="Giàn phơi xếp gắn tường với các cánh tay inox gập gọn" width="480" height="480" srcset="/assets/images/services/gian-phoi-xep-tuong-480.webp 480w, /assets/images/services/gian-phoi-xep-tuong-720.webp 720w" sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw" loading="lazy" decoding="async"></div>
       <div class="card__body">
-        <h3>Giàn Phơi Xếp Gắn Tường</h3>
+        <h3><a class="card__title-link" href="/gian-phoi-xep-tuong.html">Giàn Phơi Xếp Gắn Tường</a></h3>
         <p class="card__price">1.800.000 – 3.000.000đ/bộ</p>
         <p class="card__blurb">Inox 304, gấp gọn sát tường, tiết kiệm không gian.</p>
       <dl class="spec-line">
@@ -507,7 +529,10 @@
         <div class="spec-line__row"><dt>Ưu điểm</dt><dd>Gấp gọn sát tường</dd></div>
         <div class="spec-line__row"><dt>Bảo hành</dt><dd>5 năm</dd></div>
       </dl>
-        <a class="btn btn--primary" href="/lien-he.html?dich-vu=gian-phoi-xep-tuong">Nhận báo giá</a>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/lien-he.html?dich-vu=gian-phoi-xep-tuong">Nhận báo giá</a>
+          <a class="btn btn--ghost" href="/gian-phoi-xep-tuong.html">Chi tiết</a>
+        </div>
       </div>
     </article>
       </div>
@@ -525,7 +550,7 @@
     <article class="card card--service" id="luoi-cap-ban-cong">
       <div class="card__figure card__figure--photo"><img src="/assets/images/services/luoi-cap-ban-cong-480.webp" alt="Lưới cáp inox căng kín lan can ban công nhìn ra thành phố" width="480" height="337" srcset="/assets/images/services/luoi-cap-ban-cong-480.webp 480w, /assets/images/services/luoi-cap-ban-cong-650.webp 650w" sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw" loading="lazy" decoding="async"></div>
       <div class="card__body">
-        <h3>Lưới Cáp Ban Công Inox</h3>
+        <h3><a class="card__title-link" href="/luoi-cap-ban-cong.html">Lưới Cáp Ban Công Inox</a></h3>
         <p class="card__price">180.000 – 250.000đ/m²</p>
         <p class="card__blurb">Chất liệu inox cao cấp, an toàn cho trẻ nhỏ.</p>
       <dl class="spec-line">
@@ -533,13 +558,16 @@
         <div class="spec-line__row"><dt>An toàn</dt><dd>Cho trẻ nhỏ, vật nuôi</dd></div>
         <div class="spec-line__row"><dt>Bảo hành</dt><dd>3 năm</dd></div>
       </dl>
-        <a class="btn btn--primary" href="/lien-he.html?dich-vu=luoi-cap-ban-cong">Nhận báo giá</a>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/lien-he.html?dich-vu=luoi-cap-ban-cong">Nhận báo giá</a>
+          <a class="btn btn--ghost" href="/luoi-cap-ban-cong.html">Chi tiết</a>
+        </div>
       </div>
     </article>
     <article class="card card--service" id="cua-luoi-chong-muoi">
       <div class="card__figure card__figure--photo"><img src="/assets/images/services/cua-luoi-chong-muoi-480.webp" alt="Cửa lưới chống muỗi cố định lắp cho cửa kính lùa" width="480" height="480" srcset="/assets/images/services/cua-luoi-chong-muoi-480.webp 480w, /assets/images/services/cua-luoi-chong-muoi-600.webp 600w" sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw" loading="lazy" decoding="async"></div>
       <div class="card__body">
-        <h3>Cửa Lưới Chống Muỗi</h3>
+        <h3><a class="card__title-link" href="/cua-luoi-chong-muoi.html">Cửa Lưới Chống Muỗi</a></h3>
         <p class="card__price">450.000 – 600.000đ/m²</p>
         <p class="card__blurb">Khung nhôm cao cấp, lưới sợi thủy tinh chống cháy.</p>
       <dl class="spec-line">
@@ -547,7 +575,10 @@
         <div class="spec-line__row"><dt>Lưới</dt><dd>Sợi thủy tinh chống cháy</dd></div>
         <div class="spec-line__row"><dt>Bảo hành</dt><dd>Liên hệ</dd></div>
       </dl>
-        <a class="btn btn--primary" href="/lien-he.html?dich-vu=cua-luoi-chong-muoi">Nhận báo giá</a>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/lien-he.html?dich-vu=cua-luoi-chong-muoi">Nhận báo giá</a>
+          <a class="btn btn--ghost" href="/cua-luoi-chong-muoi.html">Chi tiết</a>
+        </div>
       </div>
     </article>
       </div>
@@ -565,7 +596,7 @@
     <article class="card card--service" id="vach-ngan-lanh">
       <div class="card__figure card__figure--photo"><img src="/assets/images/services/vach-ngan-lanh-480.webp" alt="Vách ngăn lạnh điều hoà lắp trong khung cửa gỗ" width="480" height="480" srcset="/assets/images/services/vach-ngan-lanh-480.webp 480w, /assets/images/services/vach-ngan-lanh-650.webp 650w" sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw" loading="lazy" decoding="async"></div>
       <div class="card__body">
-        <h3>Vách Ngăn Lạnh Điều Hoà</h3>
+        <h3><a class="card__title-link" href="/vach-ngan-lanh.html">Vách Ngăn Lạnh Điều Hoà</a></h3>
         <p class="card__price">350.000 – 500.000đ/m²</p>
         <p class="card__blurb">Giữ nhiệt hiệu quả, tiết kiệm điện năng, ngăn bụi &amp; côn trùng.</p>
       <dl class="spec-line">
@@ -573,13 +604,16 @@
         <div class="spec-line__row"><dt>Ứng dụng</dt><dd>Văn phòng, nhà xưởng</dd></div>
         <div class="spec-line__row"><dt>Bảo hành</dt><dd>Liên hệ</dd></div>
       </dl>
-        <a class="btn btn--primary" href="/lien-he.html?dich-vu=vach-ngan-lanh">Nhận báo giá</a>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/lien-he.html?dich-vu=vach-ngan-lanh">Nhận báo giá</a>
+          <a class="btn btn--ghost" href="/vach-ngan-lanh.html">Chi tiết</a>
+        </div>
       </div>
     </article>
     <article class="card card--service" id="mai-hien-quay-tay">
       <div class="card__figure card__figure--photo"><img src="/assets/images/services/mai-hien-quay-tay-480.webp" alt="Mái hiên vải bạt màu xanh vươn ra trước mặt tiền cửa hàng" width="480" height="270" srcset="/assets/images/services/mai-hien-quay-tay-480.webp 480w, /assets/images/services/mai-hien-quay-tay-960.webp 960w" sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw" loading="lazy" decoding="async"></div>
       <div class="card__body">
-        <h3>Mái Hiên Quay Tay</h3>
+        <h3><a class="card__title-link" href="/mai-hien-quay-tay.html">Mái Hiên Quay Tay</a></h3>
         <p class="card__price">700.000 – 950.000đ/m²</p>
         <p class="card__blurb">Khung sắt sơn tĩnh điện, vải bạt cao cấp chống tia UV.</p>
       <dl class="spec-line">
@@ -587,13 +621,16 @@
         <div class="spec-line__row"><dt>Vật liệu</dt><dd>Vải bạt chống tia UV</dd></div>
         <div class="spec-line__row"><dt>Bảo hành</dt><dd>Liên hệ</dd></div>
       </dl>
-        <a class="btn btn--primary" href="/lien-he.html?dich-vu=mai-hien-quay-tay">Nhận báo giá</a>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/lien-he.html?dich-vu=mai-hien-quay-tay">Nhận báo giá</a>
+          <a class="btn btn--ghost" href="/mai-hien-quay-tay.html">Chi tiết</a>
+        </div>
       </div>
     </article>
     <article class="card card--service" id="bat-che-nang-mua">
       <div class="card__figure card__figure--photo"><img src="/assets/images/services/bat-che-nang-mua-480.webp" alt="Bạt che nắng mưa tự cuốn lắp bên ngoài mặt kính toà nhà" width="480" height="360" srcset="/assets/images/services/bat-che-nang-mua-480.webp 480w, /assets/images/services/bat-che-nang-mua-600.webp 600w" sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw" loading="lazy" decoding="async"></div>
       <div class="card__body">
-        <h3>Bạt Che Nắng Mưa Tự Cuốn</h3>
+        <h3><a class="card__title-link" href="/bat-che-nang-mua.html">Bạt Che Nắng Mưa Tự Cuốn</a></h3>
         <p class="card__price">850.000 – 1.200.000đ/m²</p>
         <p class="card__blurb">Hệ thống cuốn tự động, che nắng chắn mưa hiệu quả.</p>
       <dl class="spec-line">
@@ -601,7 +638,10 @@
         <div class="spec-line__row"><dt>Ứng dụng</dt><dd>Ban công, sân thượng</dd></div>
         <div class="spec-line__row"><dt>Bảo hành</dt><dd>Liên hệ</dd></div>
       </dl>
-        <a class="btn btn--primary" href="/lien-he.html?dich-vu=bat-che-nang-mua">Nhận báo giá</a>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/lien-he.html?dich-vu=bat-che-nang-mua">Nhận báo giá</a>
+          <a class="btn btn--ghost" href="/bat-che-nang-mua.html">Chi tiết</a>
+        </div>
       </div>
     </article>
       </div>
@@ -890,6 +930,19 @@
     <span>Nhận báo giá</span>
   </a>
 </nav>
+
+<div class="float-contact">
+  <a class="float-contact__item float-contact__item--zalo" href="https://zalo.me/0902725760" target="_blank" rel="noopener">
+    <span class="float-contact__label" aria-hidden="true">Nhắn Zalo</span>
+    <span class="float-contact__dot"><svg class="icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 12.5a1.7 1.7 0 0 1-1.7 1.7H6.7L3.3 17.5V4.2a1.7 1.7 0 0 1 1.7-1.7h10.8a1.7 1.7 0 0 1 1.7 1.7z"/><path d="M7.1 6.7h5.8L7.1 11.3h5.8"/></svg></span>
+    <span class="visually-hidden">Nhắn tin Zalo 0902.725.760</span>
+  </a>
+  <a class="float-contact__item float-contact__item--call" href="tel:+84902725760" data-action="call">
+    <span class="float-contact__label" aria-hidden="true">0902.725.760</span>
+    <span class="float-contact__dot"><svg class="icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.5 14.1v2.5a1.7 1.7 0 0 1-1.8 1.7 16.5 16.5 0 0 1-7.2-2.6 16.3 16.3 0 0 1-5-5A16.5 16.5 0 0 1 1.9 3.5 1.7 1.7 0 0 1 3.6 1.7h2.5a1.7 1.7 0 0 1 1.7 1.4c.1.8.3 1.6.6 2.3a1.7 1.7 0 0 1-.4 1.8L7 8.3a13.3 13.3 0 0 0 5 5l1.1-1.1a1.7 1.7 0 0 1 1.8-.4c.7.3 1.5.5 2.3.6a1.7 1.7 0 0 1 1.4 1.7z"/></svg></span>
+    <span class="visually-hidden">Gọi 0902.725.760</span>
+  </a>
+</div>
 
 <script src="/assets/js/main.js" defer></script>
 </body>

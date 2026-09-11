@@ -34,6 +34,12 @@ class Service:
     popular: bool
     photo: str
     photo_alt: str
+    intro: str
+
+    @property
+    def url(self) -> str:
+        """Trang riêng của dịch vụ, đặt ở thư mục gốc."""
+        return f"/{self.slug}.html"
 
 
 @dataclass(frozen=True)
@@ -43,6 +49,7 @@ class Project:
     img: str
     location: str
     work: str
+    duration: str
     alt: str
 
 
@@ -64,6 +71,12 @@ class Post:
     desc: str
     category: str
     source: str
+    url_slug: str
+
+    @property
+    def url(self) -> str:
+        """Giữ nguyên URL như site đang chạy để không mất thứ hạng tìm kiếm."""
+        return f"/{self.url_slug}.html"
 
 
 @dataclass(frozen=True)

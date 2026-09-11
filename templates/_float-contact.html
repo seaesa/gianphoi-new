@@ -1,0 +1,12 @@
+<div class="float-contact">
+  <a class="float-contact__item float-contact__item--zalo" href="{{ zalo_url }}" target="_blank" rel="noopener">
+    <span class="float-contact__label" aria-hidden="true">Nhắn Zalo</span>
+    <span class="float-contact__dot">{{{ icon_zalo }}}</span>
+    <span class="visually-hidden">Nhắn tin Zalo {{ phone_display }}</span>
+  </a>
+  <a class="float-contact__item float-contact__item--call" href="tel:{{ phone }}" data-action="call">
+    <span class="float-contact__label" aria-hidden="true">{{ phone_display }}</span>
+    <span class="float-contact__dot">{{{ icon_phone }}}</span>
+    <span class="visually-hidden">Gọi {{ phone_display }}</span>
+  </a>
+</div>

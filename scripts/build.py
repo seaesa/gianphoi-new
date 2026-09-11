@@ -84,7 +84,7 @@ def shell_context(site: SiteData, *, page_id: str, **extra) -> dict:
         "city": business.city,
         "hours_display": HOURS_DISPLAY,
         "year": datetime.date.today().year,
-        "nav_list": components.nav_list(page_id),
+        "nav_list": components.nav_list(site, page_id),
         "footer_services": components.footer_services(site),
         "icon_phone": components.icon("phone"),
         "icon_zalo": components.icon("zalo"),
@@ -234,22 +234,115 @@ def build_services(site: SiteData) -> str:
     )
 
 
-def build_areas(site: SiteData) -> str:
+# Từ khoá lọc FAQ liên quan cho từng trang dịch vụ. Chỉ lọc lại câu đã có
+# trong site.json, không viết thêm câu hỏi mới.
+FAQ_KEYWORDS = {
+    "gian-phoi-dieu-khien": ("điều khiển", "giàn phơi"),
+    "gian-phoi-treo-tran": ("treo trần", "giàn phơi"),
+    "gian-phoi-xep-tuong": ("xếp gọn", "giàn phơi"),
+    "luoi-cap-ban-cong": ("lưới cáp",),
+    "cua-luoi-chong-muoi": ("cửa lưới",),
+    "vach-ngan-lanh": ("vách",),
+    "mai-hien-quay-tay": ("mái hiên",),
+    "bat-che-nang-mua": ("bạt che",),
+}
+
+
+def _service_faqs(site: SiteData, service):
+    keys = FAQ_KEYWORDS.get(service.slug, ())
+    matched = [
+        faq
+        for faq in site.faqs
+        if any(k.lower() in (faq.question + faq.answer).lower() for k in keys)
+    ]
+    return tuple(matched[:4])
+
+
+def build_service_pages(site: SiteData) -> list[str]:
+    """Một trang riêng cho mỗi dịch vụ, để từng dịch vụ xếp hạng độc lập."""
+    from scripts.sitedata import format_price
+
+    written = []
+    for service in site.services:
+        faqs = _service_faqs(site, service)
+        faq_section = ""
+        if faqs:
+            faq_section = (
+                '  <section class="band band--surface" id="faq">\n'
+                '    <div class="container">\n'
+                '      <div class="section-head">\n'
+                '        <span class="eyebrow">FAQ</span>\n'
+                f"        <h2>Câu hỏi về {components.escape(service.name.lower())}</h2>\n"
+                "      </div>\n"
+                f"{components.faq_list(faqs, id_prefix='faq-' + service.slug)}\n"
+                '      <div class="cluster mt-7">\n'
+                '        <a class="btn btn--ghost" href="/dich-vu.html#faq">'
+                "Xem tất cả câu hỏi</a>\n"
+                "      </div>\n"
+                "    </div>\n"
+                "  </section>\n"
+            )
+
+        crumbs = [
+            ("Trang chủ", "/"),
+            ("Dịch vụ", "/dich-vu.html"),
+            (service.name, service.url),
+        ]
+        written.append(
+            render_page(
+                site,
+                template="service.html",
+                out=f"{service.slug}.html",
+                page_id="services",
+                title=f"{service.name} — giá & lắp đặt | {site.business.name}",
+                description=f"{service.blurb} {format_price(service)}. "
+                f"Khảo sát và báo giá miễn phí tại TP.HCM và Bình Dương.",
+                path=service.url,
+                jsonld=schema.to_jsonld(
+                    schema.service_schema(site, service),
+                    schema.breadcrumb_list(crumbs),
+                ),
+                main_context={
+                    "service_name": service.name,
+                    "service_slug": service.slug,
+                    "service_group": service.group,
+                    "service_blurb": service.blurb,
+                    "service_intro": service.intro,
+                    "service_price": format_price(service),
+                    "service_specs": components.spec_line(service),
+                    "service_photo": components.photo(
+                        service.photo,
+                        service.photo_alt,
+                        folder="services",
+                        sizes="(min-width: 900px) 520px, 92vw",
+                        lazy=False,
+                    ),
+                    "stepper": components.stepper(PROCESS_STEPS),
+                    "rail": components.numeric_rail(site.facts),
+                    "faq_section": faq_section,
+                    "related": components.related_services(site, service),
+                },
+            )
+        )
+    return written
+
+
+def build_projects(site: SiteData) -> str:
     import urllib.parse
 
-    crumbs = [("Trang chủ", "/"), ("Khu vực phục vụ", "/khu-vuc.html")]
+    crumbs = [("Trang chủ", "/"), ("Dự án", "/du-an.html")]
     query = urllib.parse.quote(site.business.maps_query)
     return render_page(
         site,
-        template="khu-vuc.html",
-        out="khu-vuc.html",
-        page_id="areas",
-        title=f"Khu vực phục vụ | {site.business.name}",
+        template="du-an.html",
+        out="du-an.html",
+        page_id="projects",
+        title=f"Dự án đã thi công | {site.business.name}",
         description=(
-            "Khu vực nhận khảo sát và thi công giàn phơi thông minh, lưới cáp ban công "
-            "tại TP.HCM và Bình Dương."
+            "Hình ảnh thực tế từ các công trình lắp đặt giàn phơi thông minh, cửa lưới "
+            "và vách lạnh tại Bình Dương, Thủ Dầu Một, Thủ Đức, Quận 7 và Quận 1."
         ),
-        path="/khu-vuc.html",
+        path="/du-an.html",
         jsonld=schema.to_jsonld(
             schema.local_business(site), schema.breadcrumb_list(crumbs)
         ),
@@ -406,18 +499,18 @@ def build_posts(site: SiteData) -> list[str]:
         crumbs = [
             ("Trang chủ", "/"),
             ("Blog", "/blog.html"),
-            (post.title, f"/blog/{post.slug}.html"),
+            (post.title, post.url),
         ]
 
         written.append(
             render_page(
                 site,
                 template="post.html",
-                out=os.path.join("blog", f"{post.slug}.html"),
+                out=f"{post.url_slug}.html",
                 page_id="blog",
                 title=f"{post.title} | Blog {site.business.name}",
                 description=post.desc,
-                path=f"/blog/{post.slug}.html",
+                path=post.url,
                 jsonld=schema.to_jsonld(
                     schema.blog_posting(site, post), schema.breadcrumb_list(crumbs)
                 ),
@@ -449,7 +542,7 @@ STATIC_PAGES = (
     ("index.html", "/", "1.0"),
     ("dich-vu.html", "/dich-vu.html", "0.9"),
     ("lien-he.html", "/lien-he.html", "0.9"),
-    ("khu-vuc.html", "/khu-vuc.html", "0.7"),
+    ("du-an.html", "/du-an.html", "0.8"),
     ("gioi-thieu.html", "/gioi-thieu.html", "0.7"),
     ("blog.html", "/blog.html", "0.7"),
 )
@@ -463,10 +556,19 @@ def build_sitemap(site: SiteData) -> str:
     ]
     entries += [
         (
-            f"{schema.BASE_URL}/blog/{post.slug}.html",
+            f"{schema.BASE_URL}{service.url}",
+            today,
+            "0.85",
+            f"{service.slug}.html",
+        )
+        for service in site.services
+    ]
+    entries += [
+        (
+            f"{schema.BASE_URL}{post.url}",
             post.iso_date,
             "0.6",
-            f"blog/{post.slug}.html",
+            f"{post.url_slug}.html",
         )
         for post in site.posts
     ]
@@ -501,7 +603,8 @@ def build(root: str = ROOT) -> list[str]:
     return [
         build_home(site),
         build_services(site),
-        build_areas(site),
+        *build_service_pages(site),
+        build_projects(site),
         build_about(site),
         build_contact(site),
         build_blog_index(site),

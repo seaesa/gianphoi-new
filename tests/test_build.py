@@ -219,22 +219,28 @@ class TestServicesPage(unittest.TestCase):
         self.assertEqual(re.findall(r'\sstyle="', self.html), [])
 
 
-class TestAreasPage(unittest.TestCase):
-    """Thay du-an.html — spec §4.6."""
+class TestProjectsPage(unittest.TestCase):
+    """du-an.html — dùng lại đúng dữ liệu dự án của site đang chạy."""
 
     def setUp(self):
-        self.html = read_output("khu-vuc.html")
+        self.html = read_output("du-an.html")
 
-    def test_old_projects_page_is_gone(self):
-        self.assertFalse(os.path.exists(os.path.join(ROOT, "du-an.html")))
+    def test_old_areas_page_is_gone(self):
+        self.assertFalse(os.path.exists(os.path.join(ROOT, "khu-vuc.html")))
 
-    def test_does_not_claim_stock_photos_are_completed_projects(self):
-        # Spec §2.2 — đây là lý do trang cũ bị đổi mục đích.
-        self.assertNotIn("Dự án đã thi công", self.html)
+    def test_claims_completed_work_only_with_real_photos(self):
+        """Nhãn "đã thi công" giờ hợp lệ vì ảnh là ảnh công trình thật;
+        nhưng tuyệt đối không được quay lại dùng ảnh stock cũ."""
+        self.assertIn("Dự án đã thi công", self.html)
         for stock in ("projects/thu-duc.jpg", "projects/quan-1.jpg",
                       "projects/quan-7.jpg", "projects/thu-dau-mot.jpg"):
             with self.subTest(stock=stock):
                 self.assertNotIn(stock, self.html)
+
+    def test_each_project_states_duration(self):
+        for project in SITE.projects:
+            with self.subTest(project=project.img):
+                self.assertIn(project.duration, self.html)
 
     def test_no_tel_link_on_project_cards(self):
         # Sửa lỗi C5: thẻ dự án cũ link tới tel:.
@@ -253,7 +259,7 @@ class TestAreasPage(unittest.TestCase):
             self.html.count('class="card card--project"'), len(SITE.projects)
         )
 
-    def test_each_project_states_location_and_work(self):
+    def test_each_project_states_location_work_and_alt(self):
         for project in SITE.projects:
             with self.subTest(project=project.img):
                 self.assertIn(project.location, self.html)
@@ -357,7 +363,8 @@ class TestBlogIndex(unittest.TestCase):
 
 class TestBlogPost(unittest.TestCase):
     def setUp(self):
-        self.html = read_output("blog/quan-1.html")
+        post = next(p for p in SITE.posts if p.slug == "quan-1")
+        self.html = read_output(post.url.lstrip("/"))
 
     def test_has_conversion_sidebar(self):
         # Sửa lỗi C7.
@@ -391,12 +398,108 @@ class TestBlogPost(unittest.TestCase):
         self.assertIn(post.img_alt, self.html)
 
 
+class TestBlogUrlsMatchLiveSite(unittest.TestCase):
+    """Giữ nguyên URL của site đang chạy để không mất thứ hạng tìm kiếm."""
+
+    def test_posts_live_at_root_with_long_slugs(self):
+        for post in SITE.posts:
+            with self.subTest(post=post.slug):
+                self.assertTrue(post.url.startswith("/"))
+                self.assertNotIn("/blog/", post.url)
+                self.assertGreater(len(post.url_slug), 20)
+
+    def test_blog_index_links_to_those_urls(self):
+        html = read_output("blog.html")
+        for post in SITE.posts:
+            with self.subTest(post=post.slug):
+                self.assertIn(f'href="{post.url}"', html)
+
+    def test_old_blog_folder_is_gone(self):
+        self.assertFalse(os.path.isdir(os.path.join(ROOT, "blog")))
+
+
+class TestServicePages(unittest.TestCase):
+    """Mỗi dịch vụ một trang riêng để xếp hạng độc lập."""
+
+    def test_one_page_per_service(self):
+        ensure_built()
+        for service in SITE.services:
+            with self.subTest(service=service.slug):
+                self.assertTrue(
+                    os.path.exists(os.path.join(ROOT, f"{service.slug}.html"))
+                )
+
+    def test_page_states_price_and_specs(self):
+        from scripts.sitedata import format_price
+
+        for service in SITE.services:
+            html = read_output(f"{service.slug}.html")
+            with self.subTest(service=service.slug):
+                self.assertIn(format_price(service), html)
+                self.assertIn('class="spec-line"', html)
+                self.assertIn(service.intro, html)
+
+    def test_page_carries_service_schema_and_breadcrumb(self):
+        html = read_output("gian-phoi-dieu-khien.html")
+        self.assertIn('"@type": "Service"', html)
+        self.assertIn("BreadcrumbList", html)
+
+    def test_page_has_exactly_one_h1(self):
+        for service in SITE.services:
+            html = read_output(f"{service.slug}.html")
+            with self.subTest(service=service.slug):
+                self.assertEqual(len(re.findall(r"<h1[\s>]", html)), 1)
+
+    def test_no_inline_style_on_service_pages(self):
+        for service in SITE.services:
+            html = read_output(f"{service.slug}.html")
+            with self.subTest(service=service.slug):
+                self.assertEqual(re.findall(r'\sstyle="', html), [])
+
+
+class TestServicesDropdown(unittest.TestCase):
+    def test_every_page_lists_all_services_in_nav(self):
+        for name in ("index.html", "dich-vu.html", "du-an.html", "blog.html"):
+            html = read_output(name)
+            with self.subTest(page=name):
+                for service in SITE.services:
+                    self.assertIn(f'href="{service.url}"', html)
+
+    def test_dropdown_toggle_is_accessible(self):
+        html = read_output("index.html")
+        self.assertIn('class="nav__toggle"', html)
+        self.assertIn('aria-controls="nav-services"', html)
+        self.assertIn('id="nav-services"', html)
+
+
+class TestFloatingContact(unittest.TestCase):
+    def test_present_on_every_page(self):
+        for name in ("index.html", "dich-vu.html", "du-an.html",
+                     "gioi-thieu.html", "lien-he.html", "blog.html"):
+            html = read_output(name)
+            with self.subTest(page=name):
+                self.assertIn('class="float-contact"', html)
+                self.assertIn(SITE.business.zalo_url, html)
+
+    def test_call_button_is_declared_a_call_action(self):
+        html = read_output("index.html")
+        block = html.split('class="float-contact"')[1].split("</div>")[0]
+        self.assertIn("float-contact__item--zalo", block)
+
+
+class TestHoaPhatLogo(unittest.TestCase):
+    def test_header_uses_hoa_phat_logo(self):
+        html = read_output("index.html")
+        self.assertIn("logo-hoa-phat.png", html)
+        self.assertNotIn('src="/assets/images/logo.png"', html)
+
+
 class TestAllPostsBuild(unittest.TestCase):
     def test_every_post_file_exists(self):
         ensure_built()
         for post in SITE.posts:
             with self.subTest(post=post.slug):
-                path = os.path.join(ROOT, "blog", f"{post.slug}.html")
+                path = os.path.join(ROOT, f"{post.url_slug}.html")
                 self.assertTrue(os.path.exists(path))
 
     def test_old_build_script_removed(self):

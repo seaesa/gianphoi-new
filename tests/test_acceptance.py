@@ -157,15 +157,17 @@ class Criterion08KeyboardNavigable(unittest.TestCase):
                 self.assertIn('class="skip-link"', read(path))
 
     def test_accordion_buttons_expose_state(self):
+        """Soi trực tiếp từng nút FAQ thay vì đếm tổng aria-expanded trên
+        trang — nav cũng có aria-expanded nên phép trừ là sai cách."""
         for path in all_pages():
             html = read(path)
-            if 'class="faq__question"' not in html:
+            buttons = re.findall(r"<button[^>]*faq__question[^>]*>", html)
+            if not buttons:
                 continue
-            with self.subTest(page=os.path.basename(path)):
-                self.assertEqual(
-                    html.count('class="faq__question"'),
-                    html.count('aria-expanded="false"') - html.count("nav-toggle"),
-                )
+            for button in buttons:
+                with self.subTest(page=os.path.basename(path)):
+                    self.assertIn("aria-expanded=", button)
+                    self.assertIn("aria-controls=", button)
 
 
 class Criterion09NoHorizontalScroll(unittest.TestCase):
@@ -203,10 +205,22 @@ class Criterion10TelLinksOnlyOnCallActions(unittest.TestCase):
 
 
 class Criterion11NoFakeProjectClaims(unittest.TestCase):
-    def test_no_page_labels_stock_photos_as_completed_work(self):
+    def test_completed_work_claims_are_backed_by_real_photos(self):
+        """Nhãn "đã thi công" chỉ được xuất hiện trên trang có ảnh công
+        trình thật. Bản cũ gắn nhãn này lên ảnh stock nước ngoài."""
         for path in all_pages():
+            html = read(path)
+            if "Dự án đã thi công" not in html:
+                continue
             with self.subTest(page=os.path.basename(path)):
-                self.assertNotIn("Dự án đã thi công", read(path))
+                self.assertIn("/assets/images/projects/", html)
+                self.assertIn('class="card card--project"', html)
+
+    def test_every_project_photo_has_a_descriptive_alt(self):
+        html = read(os.path.join(ROOT, "du-an.html"))
+        for project in SITE.projects:
+            with self.subTest(project=project.img):
+                self.assertIn(project.alt, html)
 
     def test_no_page_references_removed_stock_photos(self):
         for path in all_pages():
