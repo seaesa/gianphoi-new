@@ -251,6 +251,57 @@ class Criterion12IllustrationsAreRealPhotos(unittest.TestCase):
                 self.assertIn("srcset=", html)
 
 
+class Criterion13NoBrokenInternalLinks(unittest.TestCase):
+    """Mọi link nội bộ phải trỏ tới file có thật, và mọi neo #id phải tồn tại
+    trên đúng trang đó. Lỗi loại này từng lọt: sau khi đổi khu-vuc.html thành
+    du-an.html, trang chủ và footer vẫn trỏ tới trang đã xoá."""
+
+    def _targets(self):
+        seen = {}
+        for path in all_pages():
+            html = visible(path)
+            for href in re.findall(r'href="(/[^"]*)"', html):
+                seen.setdefault(href, set()).add(os.path.basename(path))
+        return seen
+
+    def test_every_internal_link_resolves_to_a_built_file(self):
+        missing = []
+        for href, pages in self._targets().items():
+            target = href.split("#")[0].split("?")[0]
+            if target in ("", "/"):
+                continue
+            full = os.path.join(ROOT, target.lstrip("/").replace("/", os.sep))
+            if not os.path.exists(full):
+                missing.append((href, sorted(pages)))
+        self.assertEqual(missing, [], f"Link nội bộ hỏng: {missing}")
+
+    def test_every_fragment_target_exists_on_its_page(self):
+        missing = []
+        for href in self._targets():
+            if "#" not in href:
+                continue
+            target, _, frag = href.partition("#")
+            if not frag:
+                continue
+            target = target or "/index.html"
+            if target == "/":
+                target = "/index.html"
+            full = os.path.join(ROOT, target.lstrip("/").replace("/", os.sep))
+            if not os.path.exists(full):
+                continue
+            if f'id="{frag}"' not in read(full):
+                missing.append(href)
+        self.assertEqual(missing, [], f"Neo không tồn tại: {missing}")
+
+    def test_no_page_still_references_removed_pages(self):
+        """Chỉ soi link trang; `/assets/images/blog/` là thư mục ảnh hợp lệ
+        nên không được tính là URL bài viết cũ."""
+        for path in all_pages():
+            with self.subTest(page=os.path.basename(path)):
+                self.assertNotIn("khu-vuc.html", read(path))
+                self.assertEqual(re.findall(r'href="/blog/', read(path)), [])
+
+
 class TestSitemapAndRobots(unittest.TestCase):
     def test_sitemap_lists_every_page(self):
         ensure_built()

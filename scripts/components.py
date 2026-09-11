@@ -305,7 +305,7 @@ def nav_list(site: SiteData, current: str) -> str:
 
 def footer_services(site: SiteData) -> str:
     return "\n".join(
-        f'          <li><a href="/dich-vu.html#{escape(s.slug)}">'
+        f'          <li><a href="{escape(s.url)}">'
         f"{escape(s.name)}</a></li>"
         for s in site.services
     )
@@ -341,7 +341,7 @@ def usecase_card(
         f"        <h3>{escape(title)}</h3>\n"
         f"        <p>{escape(body)}</p>\n"
         f'        <p class="card__price">{escape(format_price(service))}</p>\n'
-        f'        <a class="btn btn--ghost" href="/dich-vu.html#{escape(service.slug)}">'
+        f'        <a class="btn btn--ghost" href="{escape(service.url)}">'
         f"Xem {escape(service.name)}</a>\n"
         f"      </div>\n"
         f"    </article>"

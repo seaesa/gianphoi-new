@@ -1479,13 +1479,13 @@
    Sticky bar chỉ tồn tại dưới 768px.
    ========================================================================== */
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .sticky-bar {
     display: none;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 899px) {
   .nav__list {
     display: none;
   }
@@ -1670,7 +1670,7 @@
   }
 
   /* Nhãn chỉ hiện khi hover/focus để không che nội dung */
-  @media (min-width: 768px) {
+  @media (min-width: 900px) {
     .float-contact__label {
       opacity: 0;
       transform: translateX(var(--space-2));
@@ -1691,7 +1691,7 @@
   }
 
   /* Dưới 768px đã có sticky bar ở đáy — nhấc nút nổi lên trên nó */
-  @media (max-width: 767px) {
+  @media (max-width: 899px) {
     .float-contact {
       right: var(--space-4);
       bottom: calc(56px + var(--space-4) + env(safe-area-inset-bottom));
@@ -1705,7 +1705,7 @@
 
 @layer components {
   /* --- Nav trên mobile: dropdown mở tại chỗ ------------------------ */
-  @media (max-width: 767px) {
+  @media (max-width: 899px) {
     .site-header[data-nav-open="true"] .nav__item {
       flex-wrap: wrap;
       justify-content: space-between;
@@ -1805,5 +1805,133 @@
   .card__actions .btn {
     width: 100%;
     margin-top: 0;
+  }
+}
+
+/* ==========================================================================
+   Sửa lỗi nav (báo cáo sau bản release đầu)
+   1. Dropdown biến mất khi rê chuột xuống — có 8px khoảng chết giữa mục nav
+      và menu, chuột đi qua đó là mất :hover.
+   2. Mobile: link chỉ rộng bằng chữ (32–69px) nên vùng chạm quá nhỏ và
+      viền ngăn cách trông như bị đứt.
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Cầu nối hover phủ kín khoảng hở ------------------------- */
+  /* Chỉ tồn tại khi đang hover/focus, để lúc đóng nó không chắn click
+     vào nội dung nằm ngay dưới header. */
+  .nav__item--has-menu:hover::after,
+  .nav__item--has-menu:focus-within::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: var(--space-3);
+  }
+
+  /* Cầu nối thứ hai gắn trên chính menu: menu rộng hơn mục nav nhiều,
+     nếu chỉ dựa vào cầu nối của mục nav thì rê chuột chéo sang phải vẫn
+     rơi vào khoảng chết. Cái này phủ đúng bề ngang của menu. */
+  .nav__menu::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    height: var(--space-3);
+  }
+
+  /* Giữ menu mở khi chuột đã nằm trong menu hoặc trong cầu nối của nó */
+  .nav__menu:hover {
+    display: block;
+  }
+
+  /* --- 2. Nav mobile: mỗi hàng là một vùng chạm đầy chiều ngang ---- */
+  @media (max-width: 899px) {
+    .site-header[data-nav-open="true"] .nav__list {
+      padding-block: var(--space-2);
+    }
+
+    .site-header[data-nav-open="true"] .nav__item {
+      width: 100%;
+      align-items: center;
+      gap: 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .site-header[data-nav-open="true"] .nav__item:last-child {
+      border-bottom: none;
+    }
+
+    /* Link chiếm hết phần còn lại của hàng, cao tối thiểu 48px */
+    .site-header[data-nav-open="true"] .nav__item > .nav__link {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      min-height: 48px;
+      padding-block: 0;
+      padding-inline: var(--space-1) 0;
+      border-bottom: none;
+      font-size: var(--fs-base);
+    }
+
+    /* Gạch chân hổ phách bám đáy hàng, không kéo dài hết bề ngang */
+    .site-header[data-nav-open="true"] .nav__link::after {
+      inset-inline: var(--space-1) auto;
+      width: 2rem;
+      bottom: var(--space-2);
+    }
+
+    /* Nút mở menu con nằm sát mép phải, tách khỏi vùng chạm của link */
+    .site-header[data-nav-open="true"] .nav__toggle {
+      flex: none;
+      width: 48px;
+      min-height: 48px;
+      margin-inline-start: auto;
+    }
+
+    /* Menu con: thụt vào, mỗi mục cũng là một hàng chạm đủ lớn */
+    .site-header[data-nav-open="true"] .nav__menu {
+      flex-basis: 100%;
+      padding: 0 0 var(--space-2) var(--space-4);
+      border-left: 1px solid var(--hairline);
+      margin-bottom: var(--space-2);
+    }
+
+    .site-header[data-nav-open="true"] .nav__sublink {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding-inline: var(--space-3);
+    }
+  }
+}
+
+@layer layout {
+  /* Grid/flex item mặc định min-width:auto nên không co nhỏ hơn nội dung —
+     select với tên dịch vụ dài từng đẩy trang Liên hệ tràn ngang ở 360px. */
+  .grid > *,
+  .article-layout > *,
+  .service-detail > *,
+  .cta > *,
+  .form > *,
+  .field > * {
+    min-width: 0;
+  }
+
+  /* Máy hẹp: form nhường bớt padding cho nội dung */
+  @media (max-width: 400px) {
+    .form {
+      padding: var(--space-4);
+    }
+  }
+}
+
+@layer base {
+  input,
+  select,
+  textarea {
+    max-width: 100%;
   }
 }
