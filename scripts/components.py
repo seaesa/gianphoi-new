@@ -72,12 +72,15 @@ def service_card(service: Service, *, svg_inline: str) -> str:
 
 
 def post_card(post: Post) -> str:
+    """Card bài viết dạng chữ.
+
+    Ảnh blog cũ là stock ngẫu nhiên không liên quan (ví dụ bài "giàn phơi
+    Quận 1" dùng ảnh phế tích La Mã), nên đã bị loại bỏ thay vì gắn alt sai
+    sự thật. Xem spec §2.2.
+    """
     return (
         f'    <a class="card card--post" href="/blog/{escape(post.slug)}.html" '
         f'data-category="{escape(post.category)}">\n'
-        f'      <div class="card__thumb">'
-        f'<img src="/assets/images/blog/{escape(post.img)}" alt="{escape(post.title)}" '
-        f'width="480" height="320" loading="lazy" decoding="async"></div>\n'
         f'      <div class="card__body">\n'
         f'        <p class="card__meta">'
         f'<span class="badge">{escape(post.category)}</span>'

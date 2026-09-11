@@ -404,7 +404,6 @@ def build_posts(site: SiteData) -> list[str]:
                     "date": post.date,
                     "iso_date": post.iso_date,
                     "category": post.category,
-                    "img": post.img,
                     "toc": _render_toc(outline),
                     "body": body_html,
                     "related_name": related.name,

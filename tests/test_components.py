@@ -140,13 +140,15 @@ class TestPostCard(unittest.TestCase):
         html = post_card(SITE.posts[0])
         self.assertIn("<time datetime=", html)
 
-    def test_image_has_dimensions(self):
-        html = post_card(SITE.posts[0])
-        self.assertIn("width=", html)
-        self.assertIn("height=", html)
+    def test_card_carries_no_photo(self):
+        """Ảnh blog cũ là stock ngẫu nhiên không liên quan tới bài — đã bỏ.
+        Ví dụ bài "giàn phơi Quận 1" dùng ảnh phế tích La Mã (spec §2.2)."""
+        self.assertNotIn("<img", post_card(SITE.posts[0]))
 
-    def test_image_is_lazy(self):
-        self.assertIn('loading="lazy"', post_card(SITE.posts[0]))
+    def test_card_leads_with_category_and_title(self):
+        html = post_card(SITE.posts[0])
+        self.assertIn(SITE.posts[0].category, html)
+        self.assertIn(SITE.posts[0].title, html)
 
 
 class TestAreaList(unittest.TestCase):

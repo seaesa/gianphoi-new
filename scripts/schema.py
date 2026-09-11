@@ -110,7 +110,9 @@ def blog_posting(site: SiteData, post: Post) -> dict:
         "@type": "BlogPosting",
         "headline": post.title,
         "description": post.desc,
-        "image": _abs(f"/assets/images/blog/{post.img}"),
+        # Ảnh minh hoạ bài viết đã bị gỡ vì là stock sai chủ đề (spec §2.2).
+        # Dùng logo để trường image không trỏ tới URL không tồn tại.
+        "image": _abs("/assets/images/logo.png"),
         "datePublished": post.iso_date,
         "dateModified": post.iso_date,
         "mainEntityOfPage": {

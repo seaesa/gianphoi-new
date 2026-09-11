@@ -348,10 +348,9 @@ class TestBlogPost(unittest.TestCase):
         if "<table" in self.html:
             self.assertIn("table-scroll", self.html)
 
-    def test_cover_image_has_dimensions(self):
-        cover = re.search(r'<img[^>]*class="[^"]*cover[^"]*"[^>]*>', self.html)
-        self.assertIsNotNone(cover)
-        self.assertIn("width=", cover.group(0))
+    def test_no_stock_cover_photo(self):
+        """Ảnh minh hoạ bài viết là stock sai chủ đề nên đã bị loại (spec §2.2)."""
+        self.assertNotIn("/assets/images/blog/", self.html)
 
 
 class TestAllPostsBuild(unittest.TestCase):
