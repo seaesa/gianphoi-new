@@ -141,7 +141,12 @@ def build_home(site: SiteData) -> str:
         path="/",
         jsonld=schema.to_jsonld(schema.local_business(site)),
         main_context={
-            "hero_svg": read_svg("gian-phoi-dieu-khien.svg"),
+            "hero_photo": components.photo(
+                "hero",
+                "Giàn phơi thông minh treo trần đầy móc áo trong căn hộ",
+                sizes="(min-width: 900px) 560px, 92vw",
+                lazy=False,
+            ),
             "rail": components.numeric_rail(site.facts),
             "usecases": usecases,
             "service_cards": cards,
@@ -240,6 +245,7 @@ def build_areas(site: SiteData) -> str:
         ),
         main_context={
             "areas": components.area_list(site.areas),
+            "projects": components.project_grid(site.projects),
             "map_src": f"https://www.google.com/maps?q={query}&output=embed",
         },
     )
@@ -270,6 +276,11 @@ def build_about(site: SiteData) -> str:
         main_context={
             "rail": components.numeric_rail(site.facts),
             "usecases": usecases,
+            "team_photo": components.photo(
+                "team",
+                "Nhân viên hướng dẫn khách hàng sử dụng giàn phơi sau khi lắp đặt",
+                sizes="(min-width: 900px) 760px, 92vw",
+            ),
         },
     )
 
@@ -404,6 +415,10 @@ def build_posts(site: SiteData) -> list[str]:
                     "date": post.date,
                     "iso_date": post.iso_date,
                     "category": post.category,
+                    "cover": components.photo(
+                        post.img, post.img_alt, folder="blog",
+                        sizes=components.COVER_SIZES, classes="cover",
+                    ),
                     "toc": _render_toc(outline),
                     "body": body_html,
                     "related_name": related.name,

@@ -213,7 +213,7 @@ class Criterion11NoFakeProjectClaims(unittest.TestCase):
             html = read(path)
             with self.subTest(page=os.path.basename(path)):
                 for stock in ("hero-banner", "about-thi-cong",
-                              "nhan-vien-huong-dan", "/assets/images/services/"):
+                              "nhan-vien-huong-dan", "thi-cong.jpeg"):
                     self.assertNotIn(stock, html)
 
 

@@ -32,6 +32,18 @@ class Service:
     specs: tuple[Spec, ...]
     svg: str
     popular: bool
+    photo: str
+    photo_alt: str
+
+
+@dataclass(frozen=True)
+class Project:
+    """Công trình thật. Chỉ ghi thông tin suy ra được từ chính tấm ảnh."""
+
+    img: str
+    location: str
+    work: str
+    alt: str
 
 
 @dataclass(frozen=True)
@@ -48,6 +60,7 @@ class Post:
     date: str
     iso_date: str
     img: str
+    img_alt: str
     desc: str
     category: str
     source: str
@@ -75,6 +88,7 @@ class SiteData:
     areas: tuple[str, ...]
     posts: tuple[Post, ...]
     facts: tuple[tuple[str, str], ...]
+    projects: tuple[Project, ...]
 
 
 def _require(mapping: dict, key: str, where: str):
@@ -123,10 +137,15 @@ def load_site(path: str = "site.json") -> SiteData:
     except TypeError as exc:
         raise SiteDataError(f"{full}: khối 'faqs' hoặc 'posts' sai trường — {exc}") from exc
 
+    try:
+        projects = tuple(Project(**p) for p in _require(data, "projects", full))
+    except TypeError as exc:
+        raise SiteDataError(f"{full}: khối 'projects' sai trường — {exc}") from exc
+
     facts = tuple((str(a), str(b)) for a, b in _require(data, "facts", full))
     areas = tuple(_require(data, "areas", full))
 
-    return SiteData(business, tuple(services), faqs, areas, posts, facts)
+    return SiteData(business, tuple(services), faqs, areas, posts, facts, projects)
 
 
 def format_price(service: Service) -> str:

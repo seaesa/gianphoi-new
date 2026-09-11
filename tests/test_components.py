@@ -140,10 +140,15 @@ class TestPostCard(unittest.TestCase):
         html = post_card(SITE.posts[0])
         self.assertIn("<time datetime=", html)
 
-    def test_card_carries_no_photo(self):
-        """Ảnh blog cũ là stock ngẫu nhiên không liên quan tới bài — đã bỏ.
-        Ví dụ bài "giàn phơi Quận 1" dùng ảnh phế tích La Mã (spec §2.2)."""
-        self.assertNotIn("<img", post_card(SITE.posts[0]))
+    def test_card_uses_the_posts_own_thumbnail(self):
+        html = post_card(SITE.posts[0])
+        self.assertIn(f"/assets/images/blog/{SITE.posts[0].img}-", html)
+        self.assertIn("srcset=", html)
+
+    def test_thumbnail_is_decorative(self):
+        """Tiêu đề nằm ngay trong cùng thẻ <a>; alt trùng tiêu đề sẽ khiến
+        trình đọc màn hình đọc hai lần."""
+        self.assertIn('alt=""', post_card(SITE.posts[0]))
 
     def test_card_leads_with_category_and_title(self):
         html = post_card(SITE.posts[0])

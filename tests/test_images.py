@@ -90,10 +90,25 @@ class TestOptimisedAssets(unittest.TestCase):
             with self.subTest(name=name):
                 self.assertFalse(os.path.exists(os.path.join(IMG_DIR, name)))
 
-    def test_unused_service_and_project_photos_are_not_shipped(self):
-        for folder in ("services", "projects"):
-            with self.subTest(folder=folder):
-                self.assertFalse(os.path.isdir(os.path.join(IMG_DIR, folder)))
+    def test_only_optimised_webp_is_shipped(self):
+        """Cây deploy chỉ chứa bản WebP đã tối ưu; ảnh gốc nằm trong _src."""
+        allowed = {".webp", ".png", ".ico"}
+        for dirpath, _d, filenames in os.walk(IMG_DIR):
+            if "_src" in dirpath:
+                continue
+            for name in filenames:
+                with self.subTest(name=name):
+                    self.assertIn(os.path.splitext(name)[1].lower(), allowed)
+
+    def test_old_stock_photos_are_not_shipped(self):
+        """Ảnh stock sai chủ đề của bản cũ đã bị loại khỏi cây deploy."""
+        for dirpath, _d, filenames in os.walk(IMG_DIR):
+            if "_src" in dirpath:
+                continue
+            for dead in ("hero-banner.jpg", "about-thi-cong.jpg",
+                         "nhan-vien-huong-dan.jpg", "thi-cong.jpeg"):
+                with self.subTest(dead=dead):
+                    self.assertNotIn(dead, filenames)
 
 
 class TestAltTextHonesty(unittest.TestCase):

@@ -80,9 +80,15 @@ class TestHomepageSections(unittest.TestCase):
     def test_hero_has_no_stock_photo(self):
         self.assertNotIn("hero-banner", self.html)
 
-    def test_hero_uses_line_drawing(self):
+    def test_hero_uses_a_real_photo(self):
         hero = self.html.split('class="hero"')[1].split("</section>")[0]
-        self.assertIn("<svg", hero)
+        self.assertIn("/assets/images/hero-", hero)
+        self.assertIn("srcset=", hero)
+
+    def test_hero_photo_is_eager_since_it_is_above_the_fold(self):
+        hero = self.html.split('class="hero"')[1].split("</section>")[0]
+        img = re.search(r"<img[^>]*hero-[^>]*>", hero).group(0)
+        self.assertNotIn("loading=\"lazy\"", img)
 
     def test_numeric_rail_present_with_five_facts(self):
         self.assertEqual(self.html.count('class="rail__item"'), 5)
@@ -146,9 +152,13 @@ class TestHomepageImages(unittest.TestCase):
                 self.assertIn("height=", tag)
 
     def test_below_fold_images_are_lazy(self):
+        """Logo header và ảnh hero nằm trên màn hình đầu nên tải ngay;
+        mọi ảnh sau đó phải lazy."""
         html = read_output("index.html")
         tags = re.findall(r"<img[^>]*>", html)
-        for tag in tags[1:]:
+        below_fold = [t for t in tags if "hero-" not in t][1:]
+        self.assertTrue(below_fold)
+        for tag in below_fold:
             with self.subTest(tag=tag[:70]):
                 self.assertIn('loading="lazy"', tag)
 
@@ -219,9 +229,18 @@ class TestAreasPage(unittest.TestCase):
             with self.subTest(area=area):
                 self.assertIn(area, self.html)
 
-    def test_has_empty_project_grid_awaiting_real_photos(self):
+    def test_project_grid_shows_real_photos(self):
         self.assertIn('class="project-grid"', self.html)
-        self.assertIn("ảnh công trình thật", self.html.lower())
+        self.assertEqual(
+            self.html.count('class="card card--project"'), len(SITE.projects)
+        )
+
+    def test_each_project_states_location_and_work(self):
+        for project in SITE.projects:
+            with self.subTest(project=project.img):
+                self.assertIn(project.location, self.html)
+                self.assertIn(project.work, self.html)
+                self.assertIn(project.alt, self.html)
 
     def test_no_inline_style(self):
         self.assertEqual(re.findall(r'\sstyle="', self.html), [])
@@ -348,9 +367,10 @@ class TestBlogPost(unittest.TestCase):
         if "<table" in self.html:
             self.assertIn("table-scroll", self.html)
 
-    def test_no_stock_cover_photo(self):
-        """Ảnh minh hoạ bài viết là stock sai chủ đề nên đã bị loại (spec §2.2)."""
-        self.assertNotIn("/assets/images/blog/", self.html)
+    def test_has_real_cover_photo(self):
+        post = next(p for p in SITE.posts if p.slug == "quan-1")
+        self.assertIn(f"/assets/images/blog/{post.img}-", self.html)
+        self.assertIn(post.img_alt, self.html)
 
 
 class TestAllPostsBuild(unittest.TestCase):

@@ -46,9 +46,13 @@ def make_variants(
     out: list[ImageInfo] = []
     with Image.open(resolve(src)) as img:
         img = img.convert("RGB")
-        for width in widths:
-            if width > img.width:
-                continue
+        # Không phóng to ảnh gốc. Nếu ảnh gốc hẹp hơn bề rộng lớn nhất được
+        # yêu cầu thì lấy luôn bề rộng gốc làm bản lớn nhất, để trang vẫn có
+        # đủ hai mức cho srcset.
+        targets = {w for w in widths if w <= img.width}
+        if img.width < max(widths):
+            targets.add(img.width)
+        for width in sorted(targets):
             height = round(img.height * width / img.width)
             resized = img.resize((width, height), Image.LANCZOS)
             path = os.path.join(out_dir, f"{stem}-{width}.webp")
@@ -64,6 +68,30 @@ def make_variants(
 
 def srcset_attr(variants: list[ImageInfo]) -> str:
     return ", ".join(f"{v.path} {v.width}w" for v in variants)
+
+
+def find_variants(base: str) -> list[ImageInfo]:
+    """Tìm mọi bản `<base>-<width>.webp` đã sinh, sắp theo bề rộng tăng dần.
+
+    Dò thay vì giả định, vì ảnh gốc hẹp sẽ không có bản rộng nhất.
+    """
+    import glob
+    import re
+
+    pattern = resolve(f"{base}-*.webp")
+    found: list[ImageInfo] = []
+    for path in glob.glob(pattern):
+        match = re.search(r"-(\d+)\.webp$", path)
+        if not match:
+            continue
+        url = f"{base}-{match.group(1)}.webp"
+        found.append(probe(url))
+    if not found:
+        raise FileNotFoundError(
+            f"Không có bản ảnh nào cho {base!r}. "
+            "Chạy: python -m scripts.optimize_images"
+        )
+    return sorted(found, key=lambda v: v.width)
 
 
 def image_tag(

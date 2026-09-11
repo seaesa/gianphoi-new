@@ -48,15 +48,49 @@ def spec_line(service: Service) -> str:
 # ---------------------------------------------------------------- cards
 
 
-def service_card(service: Service, *, svg_inline: str) -> str:
+CARD_SIZES = "(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw"
+COVER_SIZES = "(min-width: 1024px) 700px, 92vw"
+PROJECT_SIZES = "(min-width: 640px) 50vw, 92vw"
+
+
+def photo(stem: str, alt: str, *, folder: str = "", sizes: str,
+          lazy: bool = True, classes: str = "", decorative: bool = False) -> str:
+    """Ảnh thật kèm srcset 480w/960w và width/height chống CLS.
+
+    `stem` là tên file không đuôi; scripts/optimize_images.py sinh ra
+    <stem>-480.webp và <stem>-960.webp từ ảnh gốc trong _src/site/.
+    """
+    from scripts import images
+
+    base = f"/assets/images/{folder}/{stem}" if folder else f"/assets/images/{stem}"
+    variants = images.find_variants(base)
+    return images.image_tag(
+        variants[0].path,
+        alt,
+        sizes=sizes,
+        lazy=lazy,
+        variants=variants,
+        classes=classes,
+        decorative=decorative,
+    )
+
+
+def service_card(service: Service, *, svg_inline: str | None = None) -> str:
+    """Card dịch vụ. Dùng ảnh sản phẩm thật; `svg_inline` chỉ là phương án
+    dự phòng khi một dịch vụ chưa có ảnh."""
     badge = (
         '        <span class="badge badge--popular">Phổ biến nhất</span>\n'
         if service.popular
         else ""
     )
+    figure = (
+        photo(service.photo, service.photo_alt, folder="services", sizes=CARD_SIZES)
+        if service.photo
+        else (svg_inline or "")
+    )
     return (
         f'    <article class="card card--service" id="{escape(service.slug)}">\n'
-        f'      <div class="card__figure">{svg_inline}</div>\n'
+        f'      <div class="card__figure card__figure--photo">{figure}</div>\n'
         f'      <div class="card__body">\n'
         f"{badge}"
         f"        <h3>{escape(service.name)}</h3>\n"
@@ -72,15 +106,19 @@ def service_card(service: Service, *, svg_inline: str) -> str:
 
 
 def post_card(post: Post) -> str:
-    """Card bài viết dạng chữ.
+    """Card bài viết.
 
-    Ảnh blog cũ là stock ngẫu nhiên không liên quan (ví dụ bài "giàn phơi
-    Quận 1" dùng ảnh phế tích La Mã), nên đã bị loại bỏ thay vì gắn alt sai
-    sự thật. Xem spec §2.2.
+    Ảnh là thumbnail thật của chính bài đó. Thumbnail để alt rỗng vì tiêu đề
+    nằm ngay trong cùng thẻ <a> — nếu đặt alt trùng tiêu đề thì trình đọc màn
+    hình sẽ đọc hai lần.
     """
+    thumb = photo(
+        post.img, "", folder="blog", sizes=CARD_SIZES, decorative=True
+    )
     return (
         f'    <a class="card card--post" href="/blog/{escape(post.slug)}.html" '
         f'data-category="{escape(post.category)}">\n'
+        f'      <div class="card__thumb">{thumb}</div>\n'
         f'      <div class="card__body">\n'
         f'        <p class="card__meta">'
         f'<span class="badge">{escape(post.category)}</span>'
@@ -253,3 +291,27 @@ def usecase_card(title: str, body: str, service: Service, *, svg_inline: str) ->
         f"      </div>\n"
         f"    </article>"
     )
+
+
+def project_card(project) -> str:
+    """Công trình thật cho trang Khu vực. Không phải link, không gắn tel:
+    (lỗi C5 của bản cũ) — đây là ảnh tư liệu, không phải nút hành động."""
+    return (
+        f'      <figure class="card card--project">\n'
+        f"        "
+        + photo(project.img, project.alt, folder="projects", sizes=PROJECT_SIZES)
+        + "\n"
+        f'        <figcaption class="card__body">\n'
+        f'          <span class="badge">{escape(project.location)}</span>\n'
+        f"          <p>{escape(project.work)}</p>\n"
+        f"        </figcaption>\n"
+        f"      </figure>"
+    )
+
+
+def project_grid(projects) -> str:
+    if not projects:
+        return ('    <div class="project-grid" '
+                'data-empty="Chưa có ảnh công trình thật để đăng."></div>')
+    body = "\n".join(project_card(p) for p in projects)
+    return f'    <div class="project-grid">\n{body}\n    </div>'
