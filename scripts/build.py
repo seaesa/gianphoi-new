@@ -274,6 +274,34 @@ def build_about(site: SiteData) -> str:
     )
 
 
+def build_contact(site: SiteData) -> str:
+    import urllib.parse
+
+    crumbs = [("Trang chủ", "/"), ("Liên hệ", "/lien-he.html")]
+    query = urllib.parse.quote(site.business.maps_query)
+    contact_faqs = tuple(f for f in site.faqs if f.contact_page)
+    return render_page(
+        site,
+        template="lien-he.html",
+        out="lien-he.html",
+        page_id="contact",
+        title=f"Liên hệ & nhận báo giá | {site.business.name}",
+        description=(
+            "Gọi hotline, nhắn Zalo hoặc để lại thông tin để nhận báo giá lắp đặt giàn "
+            "phơi thông minh, lưới cáp ban công tại TP.HCM và Bình Dương."
+        ),
+        path="/lien-he.html",
+        jsonld=schema.to_jsonld(
+            schema.local_business(site), schema.breadcrumb_list(crumbs)
+        ),
+        main_context={
+            "service_options": components.service_options(site),
+            "faqs": components.faq_list(contact_faqs, id_prefix="faq-lien-he"),
+            "map_src": f"https://www.google.com/maps?q={query}&output=embed",
+        },
+    )
+
+
 def build(root: str = ROOT) -> list[str]:
     site = load_site()
     return [
@@ -281,6 +309,7 @@ def build(root: str = ROOT) -> list[str]:
         build_services(site),
         build_areas(site),
         build_about(site),
+        build_contact(site),
     ]
 
 

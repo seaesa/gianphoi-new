@@ -240,3 +240,58 @@ class TestAboutPage(unittest.TestCase):
 
     def test_no_inline_style(self):
         self.assertEqual(re.findall(r'\sstyle="', self.html), [])
+
+
+class TestContactPage(unittest.TestCase):
+    def setUp(self):
+        self.html = read_output("lien-he.html")
+
+    def test_dropdown_lists_the_eight_real_services(self):
+        """Sửa lỗi C4: bản cũ chỉ liệt kê 4 loại cửa lưới."""
+        for service in SITE.services:
+            with self.subTest(service=service.slug):
+                self.assertIn(f'value="{service.slug}"', self.html)
+
+    def test_dropdown_has_no_orphan_cua_luoi_options(self):
+        for dead in ("Cửa lưới xếp gọn", "Cửa lưới cố định",
+                     "Cửa lưới inox, nhôm cao cấp"):
+            with self.subTest(option=dead):
+                self.assertNotIn(dead, self.html)
+
+    def test_form_has_exactly_four_fields(self):
+        # Spec §4.3: Tên, SĐT, Khu vực, Dịch vụ.
+        self.assertEqual(self.html.count('class="field"'), 4)
+
+    def test_every_field_has_a_visible_label(self):
+        labels = re.findall(r'<label[^>]*for="([^"]+)"', self.html)
+        inputs = re.findall(r'<(?:input|select|textarea)[^>]*id="([^"]+)"', self.html)
+        self.assertEqual(sorted(labels), sorted(inputs))
+
+    def test_phone_field_uses_tel_input_mode(self):
+        field = re.search(r'<input[^>]*id="phone"[^>]*>', self.html).group(0)
+        self.assertIn('type="tel"', field)
+        self.assertIn('inputmode="numeric"', field)
+
+    def test_each_field_has_an_error_container(self):
+        self.assertEqual(self.html.count('class="field__error"'), 4)
+
+    def test_error_containers_are_live_regions(self):
+        self.assertEqual(self.html.count('aria-live="polite"'), 4)
+
+    def test_contact_channels_appear_before_the_form(self):
+        # Spec §4.3: Zalo và hotline đặt phía trên form.
+        self.assertLess(self.html.index("zalo.me"), self.html.index("<form"))
+
+    def test_only_four_faqs_here(self):
+        self.assertEqual(self.html.count('class="faq__question"'), 4)
+
+    def test_links_to_full_faq_list(self):
+        self.assertIn("/dich-vu.html#faq", self.html)
+
+    def test_submission_is_marked_as_not_wired_up(self):
+        # Spec §6: giữ giả lập, phải có TODO rõ ràng.
+        js = read_output("assets/js/main.js")
+        self.assertIn("TODO", js)
+
+    def test_no_inline_style(self):
+        self.assertEqual(re.findall(r'\sstyle="', self.html), [])
