@@ -199,3 +199,54 @@ def area_list(areas: tuple[str, ...]) -> str:
         f'      <li class="area-list__item">{escape(area)}</li>' for area in areas
     )
     return f'    <ul class="area-list">\n{items}\n    </ul>'
+
+
+# ---------------------------------------------------------------- navigation
+
+NAV_ITEMS = (
+    ("home", "Trang chủ", "/index.html"),
+    ("about", "Giới thiệu", "/gioi-thieu.html"),
+    ("services", "Dịch vụ", "/dich-vu.html"),
+    ("areas", "Khu vực", "/khu-vuc.html"),
+    ("blog", "Blog", "/blog.html"),
+    ("contact", "Liên hệ", "/lien-he.html"),
+)
+
+
+def nav_list(current: str) -> str:
+    items = []
+    for page_id, label, href in NAV_ITEMS:
+        marker = ' aria-current="page"' if page_id == current else ""
+        items.append(
+            f'        <li><a class="nav__link" href="{href}"{marker}>'
+            f"{escape(label)}</a></li>"
+        )
+    body = "\n".join(items)
+    return f'      <ul class="nav__list" id="nav-list">\n{body}\n      </ul>'
+
+
+def footer_services(site: SiteData) -> str:
+    return "\n".join(
+        f'          <li><a href="/dich-vu.html#{escape(s.slug)}">'
+        f"{escape(s.name)}</a></li>"
+        for s in site.services
+    )
+
+
+# ---------------------------------------------------------------- use cases
+
+
+def usecase_card(title: str, body: str, service: Service, *, svg_inline: str) -> str:
+    """Tầng quyết định trên trang chủ — sửa lỗi C6."""
+    return (
+        f'    <article class="card card--usecase">\n'
+        f'      <div class="card__figure">{svg_inline}</div>\n'
+        f'      <div class="card__body">\n'
+        f"        <h3>{escape(title)}</h3>\n"
+        f"        <p>{escape(body)}</p>\n"
+        f'        <p class="card__price">{escape(format_price(service))}</p>\n'
+        f'        <a class="btn btn--ghost" href="/dich-vu.html#{escape(service.slug)}">'
+        f"Xem {escape(service.name)}</a>\n"
+        f"      </div>\n"
+        f"    </article>"
+    )

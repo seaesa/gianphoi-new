@@ -500,6 +500,18 @@
     color: var(--amber);
   }
 
+  .card--service {
+    position: relative;
+  }
+
+  /* Badge nằm ngoài luồng để tiêu đề các card luôn thẳng hàng nhau */
+  .card--service .badge--popular {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    z-index: 1;
+  }
+
   .card--service h3 {
     font-size: var(--fs-lg);
   }
@@ -1087,7 +1099,7 @@
   .hero__figure {
     display: grid;
     place-items: center;
-    padding: var(--space-7);
+    padding: var(--space-5);
     background: var(--surface);
     border: 1px solid var(--hairline);
     border-radius: var(--r);
@@ -1096,7 +1108,7 @@
 
   .hero__figure svg {
     width: 100%;
-    max-width: 380px;
+    max-width: 520px;
     height: auto;
   }
 
